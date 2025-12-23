@@ -1,0 +1,127 @@
+
+* {
+  margin: 0;
+  padding: 0;
+   box-sizing: border-box;
+}
+
+.navbar-homepage {
+  display: flex; /*Align ang (logo, links, button) sa row.*/
+  justify-content: space-between; /*Puts first item left, last item right, links in the middle.*/
+  align-items: center; /*vertical na nakagitna ang mga items.*/
+  padding: 1rem 2rem; /*space sa navbar(top/bottom 1rem, right/left 2 rem*/
+  background-color: black; 
+  color: white;
+}
+
+.navbar-homepage .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-homepage ul {
+  list-style: none; /*para matanggal yung bullets sa <ul>*/
+  display: flex; /*para naka row yung <li> sa loob ng <ul> para hindi naka vertical*/
+  gap: 2rem; /*para mas spacing sa mga menu items*/
+}
+
+.navbar-homepage ul li {
+  cursor: pointer; /*para kapag tinapat ang mouse sa links magiging pointer hand*/
+  font-weight: 500; /*medium font para mas readable*/
+}
+
+.navbar-homepage ul li:hover { /*para kapag pinoint sa link mag iiba ang kulay */
+   color: #f0a500;
+}
+
+.navbar-homepage button {
+  padding: 0.5rem 1rem; /*magkaroon ng space sa loob ng button (0.5 rem top/bottom, 1rem right/left*/
+  background-color: #f0a500;
+  border: none; /*pang tanggal ng border line*/
+  border-radius: 5px; /*para magkaroon ng radius yung button*/
+  font-weight: bold; /*para thick ang font*/
+  cursor: pointer; /*para kapag tinapat nakaturo*/
+  transition: background-color 0.3s; /*para kapag hinover hindi agad agad mag iiba kulay para smooth ang animation or delay yung pag papakita ng background color*/
+}
+
+.navbar-homepage button:hover {
+  background-color: #d18b00;
+}
+
+.background {
+  display: flex; 
+  align-items: center; /*center vertical*/
+  justify-content: center; /* center horizontally */
+  background-color: red;
+  height: calc(100vh - 65px); /*minus sa navbar height*/
+}
+.headerParagraph {
+  background-color: blue;
+  max-width: 450px;
+  display: flex;           /* make it flex */
+  flex-direction: column;  /*para naka vertical ang children o element sa loob ng div */
+  align-items: center;     /*para naka center horizontally*/
+  justify-content: center; /*para naka center sa vertical*/
+  padding: 1rem;           /*para may spacing sa loob ng div*/
+  text-align: center;      /*para naka center ang text sa loob/child*/
+}
+
+.headerParagraph .firstParagraph {
+  font-size: 50px;
+   
+}
+
+.footer {
+  background-color: #1e1e1e;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-links li a:hover {
+  color: #f0a500;
+}
+
+.footer-copy {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.footer-socials a {
+  margin: 0 0.5rem;
+  display: inline-block;
+}
+
+.footer-socials img {
+  width: 24px;
+  height: 24px;
+}
+
+
+
+/*Mobile version styling para responsive sa mobile*/
+
+@media(max-width: 768px) {
+  nav ul {
+    flex-direction: column; /*para kapag lumiit ang screen naka column */
+    gap: 1rem; /*para may space */
+  }
+
+  .headerParagraph .firstParagraph {
+    font-size: 30px; /* smaller text on mobile */
+  }
+}

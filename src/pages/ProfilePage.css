@@ -1,0 +1,576 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f0f2f5;
+  color: #1c1e21;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+.profile-container-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* =========================
+   COVER / HEADER
+========================= */
+.cover-container {
+  min-height: 260px;
+
+  background-image:
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url('../images/fake.jpg');
+
+  background-size: cover;
+  background-position: center 40%; /* 👈 KEY FIX */
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  
+  gap: 8px;
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+}
+
+
+
+.cover-container h1 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.cover-container p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.background-image {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+}
+
+/* =========================
+   FOLLOW BUTTONS
+========================= */
+.follow-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.follow-container button {
+  padding: 6px 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: white;
+  color: #4267B2;
+  transition: all 0.2s ease;
+}
+
+.follow-container button:hover {
+  background-color: #e4e6eb;
+}
+
+/* =========================
+   STATS
+========================= */
+.profile-stats-container {
+  display: flex;
+  margin-top: 15px;
+}
+
+.profile-stats-container div {
+  padding: 0 15px;
+  font-size: 13px;
+  font-weight: 500;
+  border-right: 1px solid rgba(255,255,255,0.4);
+}
+
+.profile-stats-container div:last-child {
+  border-right: none;
+}
+
+/* =========================
+   CONTENT LAYOUT
+========================= */
+.profile-content-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* =========================
+   FEED COLUMN
+========================= */
+.content-container {
+  max-width: 650px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* =========================
+   ABOUT ME
+========================= */
+.aboutme-container {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.aboutme-container h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e4e6eb;
+    padding-bottom: 10px;
+}
+
+.aboutme-container p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #1c1e21;
+  padding: 6px 0;
+}
+
+.about-icon {
+  color: #4267B2; /* Facebook-like blue */
+  font-size: 14px;
+}
+
+.aboutme-container p:last-child {
+  border-bottom: none;
+}
+
+.edit-details-container {
+  
+  display: flex;
+  max-width: 700px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.edit-details-container button {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: rgba(232, 226, 226, 0.797);
+}
+.edit-details-container button:hover {
+  background-color: rgba(232, 226, 226, 0.614);
+}
+.follow-container button {
+  padding: 6px 18px;
+  border-radius: 3px; /* this controls the rounded corners */
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: white;
+  transition: all 0.2s ease;
+  font-weight: bold;
+  color: rgba(16, 16, 16, 0.979);
+}
+.user-plus {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  border-radius: 12px;
+  color: rgb(84, 84, 234);
+  justify-content: center;
+}
+
+.icon-color {
+    color: rgb(168, 7, 168);
+}
+.settings-icon {
+  color: grey;
+}
+.dot-icon {
+  color: black;
+}
+.message-color {
+  color: rgb(31, 31, 239);
+}
+
+
+/* =========================
+   TAB BUTTONS
+========================= */
+.buttons-container {
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.buttons-container button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.buttons-container button:hover {
+  background-color: #f0f2f5;
+}
+
+/* =========================
+   POST INPUT
+========================= */
+.post-container-profile {
+  display: flex;
+  gap: 10px;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.input-element {
+  flex-grow: 1;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccd0d5;
+  font-size: 14px;
+}
+
+.post-container-profile button {
+  background: #4267B2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* =========================
+   POST CARD
+========================= */
+.profile-post-container {
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   POST HEADER
+========================= */
+.profile-image-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-post-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-image-container p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.profile-image-container .email-element {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #65676b;
+}
+
+.button-element {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #65676b;
+}
+
+/* =========================
+   CAPTION
+========================= */
+.profile-caption-container {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1c1e21;
+  padding: 0 5px;
+}
+
+/* =========================
+   POST IMAGE
+========================= */
+.profile-user-post-container {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.galaxy-container {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* =========================
+   REACTIONS
+========================= */
+.profile-reaction-container {
+  display: flex;
+  gap: 30px;
+  padding-top: 5px;
+  font-size: 14px;
+  color: #65676b;
+}
+
+.profile-reaction-container p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.profile-reaction-container p:hover {
+  color: #4267B2;
+}
+
+/* =========================
+   FRIENDS SIDEBAR
+========================= */
+.friends-container {
+  width: 260px;
+  position: sticky;  /* makes it stick */
+  top: 10px;         /* distance from the top when scrolling */
+  align-self: flex-start; /* ensures it aligns to top in flex layout */
+}
+
+.friends-element-container {
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.see-all-color,
+.view-all-color,
+.see-blue {
+  color: rgb(73, 73, 255);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.friend-see-container {
+border-bottom: 1px solid #e4e6eb;
+padding: 7px;
+display: flex;
+justify-content: space-between;
+margin-bottom: 5px;
+}
+
+.friend-see-container .post-friends {
+  font-weight: bold;
+}
+
+.online-friends-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  border-bottom: 1px solid #e4e6eb;
+}
+
+/* Remove border for the last child */
+.online-friends-container:last-child {
+  border-bottom: none;
+}
+
+.online-friends-name {
+  display: flex;
+  flex-direction: column;
+}
+.status-element {
+  color: rgb(0, 98, 0);
+  font-size: 13px;
+}
+
+
+.profile-photos-container {
+margin-top: 20px;
+background: white;
+padding: 10px;
+border-radius: 10px;
+box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.see-photos-container {
+
+display: flex;
+justify-content: space-between;
+padding: 7px;
+border-bottom: 1px solid #e4e6eb;
+margin-bottom: 5px;
+}
+
+.photos-image-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center; /* center the two columns */
+  gap: 10px; /* space between the two divs */
+  flex-wrap: wrap; /* wrap if screen is small */
+}
+
+.photos-image-container > div {
+  display: flex;
+  flex-direction: column; /* stack images vertically */
+  gap: 10px; /* space between images in the same column */
+}
+
+.photos-image-size {
+  width: 110px;
+  height: 110px;
+  border-radius: 8px;
+  object-fit: cover; /* ensures image fits without distortion */
+  cursor: pointer; /* optional, makes images clickable */
+  transition: transform 0.2s;
+}
+
+.photos-image-size:hover {
+  transform: scale(1.05); /* subtle zoom on hover */
+}
+
+.profile-life-container {
+  background-color: white;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.profile-life-events-container {
+  
+  display: flex;
+  justify-content: space-between;
+  padding: 7px;
+  border-bottom: 1px solid #e4e6eb; 
+}
+.profile-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  padding: 10px;
+  gap: 20px; /* better spacing between elements */
+  flex-wrap: wrap; /* makes it responsive on smaller screens */
+}
+
+.profile-container-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  min-width: 200px; /* prevents it from shrinking too small */
+  height: 200px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* nicer gradient */
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* soft shadow */
+  transition: transform 0.3s, box-shadow 0.3s; /* smooth hover animation */
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profile-container-element:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.photos-element {
+  font-weight: bold;
+}
+.life-element {
+  font-weight: bold;
+}
+
+.privacy-container {
+margin-top: 10px;
+padding: 10px;
+
+display: flex;
+justify-content: space-between;
+border-radius: 12px;
+
+}
+.privacy-container p {
+  cursor: pointer;
+  
+}
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1024px) {
+  .profile-content-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .friends-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .cover-container h1 {
+    font-size: 22px;
+  }
+}
