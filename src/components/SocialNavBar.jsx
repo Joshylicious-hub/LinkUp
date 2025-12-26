@@ -20,7 +20,7 @@ return (
       <div className="logo-socialpage"><Link to="/social">LinkUp</Link></div>
         <ul>
           <li><FaUser />
-           <span className="profileLink"><Link to="/profile">Profile</Link></span>
+           <span><Link to="/profile" className="text-decoration-link">Profile</Link></span>
           </li>
           <li><FaHome /> <span>Home</span></li>
           <li><FaSearch /> <span>Search</span></li>

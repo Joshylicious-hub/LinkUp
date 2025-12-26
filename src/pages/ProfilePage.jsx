@@ -15,18 +15,81 @@ FaCalendarAlt,
 FaCog,
 FaEllipsisH,
  FaEnvelope, 
- FaUserPlus
+ FaUserPlus,
+ FaArrowLeft,
+ FaEye,
+ FaImage
 } from "react-icons/fa";
 import { BsPatchCheckFill } from "react-icons/bs";
+import { useNavigate, Link } from "react-router";
 import './ProfilePage.css';
+import { useState } from 'react';
 export function ProfilePage() {
+
+  const navigate = useNavigate();
+  
+  const [openPhoto, setOpenPhoto] = useState(false);
+
+  function changePhoto() {
+    setOpenPhoto(true);
+  }
+
+  function exitChangePhoto() {
+    setOpenPhoto(false);
+  }
+
+  function openModalPhoto() {
+    if(openPhoto) {
+      exitChangePhoto();
+    }else{
+      changePhoto();
+    }
+  }
+
   return (
     <>
     <title>LinkUp</title>
     <div className="profile-container-body">
 
+      <button
+        className="back-button"
+        onClick={() => navigate(-1)}
+      >
+        <FaArrowLeft size={20} color="white" />
+      </button>
+
       <div className="cover-container">
-        <img src={ProfessionalImg} className="background-image"/>
+
+        <img 
+        src={ProfessionalImg}
+        className="background-image"
+        onClick={openModalPhoto}
+        />
+
+      {openPhoto && (
+      <div 
+        className="modal-overlay" 
+        onClick={exitChangePhoto} // closes if you click anywhere on overlay
+      >
+        <div className="change-photo-container">
+          <Link className="photo-link" onClick={exitChangePhoto}>
+          <FaEye style={{ marginRight: "8px" }} />
+          View Story
+          </Link>
+        
+        <Link className="photo-link" onClick={exitChangePhoto}>
+          <FaUser style={{ marginRight: "8px" }} />
+          See Profile Picture
+        </Link>
+        
+        <Link className="photo-link" onClick={exitChangePhoto}>
+          <FaImage style={{ marginRight: "8px" }} />
+          Choose Profile Picture
+        </Link>
+        </div>
+      </div>
+      )}
+        
         <h1>Joshua Andres  <BsPatchCheckFill color="#1DA1F2" /></h1>
         <p>@JoshuaAndres</p>
         <p>Web Developer | Tech Enthusiast</p>

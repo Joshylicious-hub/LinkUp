@@ -69,6 +69,7 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid white;
+  cursor: pointer;
 }
 
 /* =========================
@@ -573,4 +574,88 @@ border-radius: 12px;
   .cover-container h1 {
     font-size: 22px;
   }
+}
+
+.back-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2000;
+  transform-origin: top left;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Glass background */
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.65);
+
+  /* Icon color */
+  color: white;
+
+  /* Depth */
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(255, 255, 255, 0.15);
+
+  border: none;
+  cursor: pointer;
+
+  font-size: 20px;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.back-button:hover {
+background: rgba(0, 0, 0, 0.95);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.7),
+    0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.back-button:active {
+  transform: scale(0.95);
+}
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: transparent;/* semi-transparent overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.change-photo-container {
+  position: absolute;
+  top: 130px;
+  right: 405px;
+  background-color: white;
+  z-index: 2000;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.photo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* spacing between icon and text */
+  color: #333;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.photo-link:hover {
+  background-color: #f0f0f0;
 }
