@@ -7,8 +7,9 @@ import GenesisImg from '../images/genesis.jpg';
 import AngelicaImg from '../images/angelica.jpg';
 import { Link } from 'react-router';
 import { useState } from 'react';
+import { BsPatchCheckFill } from "react-icons/bs";
 
-export function SocialRightNavBar() {
+export function SocialRightNavBar({saveUsername}) {
   const [profileLinks, setProfileLinks] = useState([{
     image: CyrilImg,
     name: 'Cyril Vicente'
@@ -35,7 +36,10 @@ export function SocialRightNavBar() {
         <Link to="/profile">
           <img src={JoshuaImg}
           className="profilePicture"/>
-          Joshua Andres
+          {saveUsername.first} {saveUsername.last}
+          {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+           ? <BsPatchCheckFill color="#1DA1F2" />
+           : null}
          </Link>   
       </div>
 

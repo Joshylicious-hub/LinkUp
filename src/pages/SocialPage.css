@@ -917,6 +917,8 @@ background-color: #f0f2f5;
 }
 
 .profile-socialpage a {
+  font-size: 13px;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -934,4 +936,22 @@ background-color: #f0f2f5;
 .profileUser a{
   text-decoration: none;
   color: #1c1e21;
+}
+.verified {
+  margin-left: 3px;
+}
+
+.heart-icon {
+  color: #65676b;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.heart-icon.liked {
+  color: #e0245e;
+  transform: scale(1.1);
+}
+
+.heart-icon:active {
+  transform: scale(0.9);
 }

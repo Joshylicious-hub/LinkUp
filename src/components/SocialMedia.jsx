@@ -1,3 +1,4 @@
+import { BsPatchCheckFill } from "react-icons/bs";
 import {
   FaVideo,
   FaComment,
@@ -5,7 +6,6 @@ import {
   FaShare,
   FaHeart,
   FaRegComment, 
-   
    FaSmile,
     FaPoll, 
     FaUserTag  
@@ -16,107 +16,18 @@ import BulaguiImg from '../images/bulagui.jpg';
 import NiverioImg from '../images/niverio.jpg';
 import SophiaImg from '../images/sophia.jpg';
 import BulaguiLoveSophia from '../images/bulaguilovesophia.png';
-import { useState } from 'react';
-import { Link } from 'react-router';
 
  
-export function SocialMedia() {
+export function SocialMedia({
+  saveUsername, 
+  showModal, 
+  setShowModal,
+  inputPost,
+  setInputPost,
+  social,
+  setSocial
+  }) {
 
-const [social, setSocial] = useState([{
-  name: 'Justine Bulagui',
-  email: '@JustineBulagui',
-  profile: BulaguiImg,
-  caption: 'Love na love ko si Sophia Bautista soon to be Sophia Bautista Bulagui 💖',
-  image: BulaguiImg,
-  post: BulaguiLoveSophia,
-  reactions: {
-    likes: 2330,
-    comments: 948,
-    shares: 902
-  },
-  id: crypto.randomUUID()
-}, {
-  name: 'Joshua Andres',
-  email: '@JoshuaAndres',
-  profile: JoshuaImg,
-  caption: 'testing to build a facebook',
-  image: JoshuaImg,
-  post: JoshuaImg,
-  reactions: {
-    likes: 1300,
-    comments: 256,
-    shares: 82
-  },
-  id: crypto.randomUUID()
-}, {
-  name: 'Cyril Vicente',
-  email: '@CyrilVicente',
-  profile: CyrilImg,
-  caption: 'tite',
-  image: CyrilImg,
-  post: CyrilImg,
-  reactions: {
-    likes: 1540,
-    comments: 573,
-    shares: 923
-  },
-  id: crypto.randomUUID()
-}, {
-  name: 'Justine Bulagui',
-  email: '@JustineBulagui',
-  profile: BulaguiImg,
-  caption: 'Love na love ko si Sophia Bautista soon to be Sophia Bautista Bulagui 💖',
-  image: BulaguiImg,
-  post: BulaguiLoveSophia,
-  reactions: {
-    likes: 2330,
-    comments: 948,
-    shares: 902
-  },
-  id: crypto.randomUUID()
-},  {
-  name: 'Justine Bulagui',
-  email: '@JustineBulagui',
-  profile: BulaguiImg,
-  caption: 'Love na love ko si Sophia Bautista soon to be Sophia Bautista Bulagui 💖',
-  image: BulaguiImg,
-  post: BulaguiLoveSophia,
-  reactions: {
-    likes: 2330,
-    comments: 948,
-    shares: 902
-  },
-  id: crypto.randomUUID()
-},  {
-  name: 'Justine Bulagui',
-  email: '@JustineBulagui',
-  profile: BulaguiImg,
-  caption: 'Love na love ko si Sophia Bautista soon to be Sophia Bautista Bulagui 💖',
-  image: BulaguiImg,
-  post: BulaguiLoveSophia,
-  reactions: {
-    likes: 2330,
-    comments: 948,
-    shares: 902
-  },
-  id: crypto.randomUUID()
-},  {
-  name: 'Justine Bulagui',
-  email: '@JustineBulagui',
-  profile: BulaguiImg,
-  caption: 'Love na love ko si Sophia Bautista soon to be Sophia Bautista Bulagui 💖',
-  image: BulaguiImg,
-  post: BulaguiLoveSophia,
-  reactions: {
-    likes: 2330,
-    comments: 948,
-    shares: 902
-  },
-  id: crypto.randomUUID()
-}]);
-
-const [showModal, setShowModal] = useState(false);
-const [inputPost, setInputPost] = useState('');
 
 function postModal() {
   setShowModal(true);
@@ -130,29 +41,64 @@ function inputModal(event) {
 setInputPost(event.target.value);
 }
 
-function addModalPost(event) {
+function addOne(id) {
+  setSocial(prevSocial =>
+    prevSocial.map(post => {
 
+    if (post.id === id) {      
+       if (post.reactions.liked) {// check if already liked
+        return { // if liked, unlike and subtract 1
+          ...post,
+          reactions: {
+            ...post.reactions,
+            likes: post.reactions.likes - 1,
+            liked: false
+          }
+          };
+        } else { // if not liked, like and add 1
+            return {
+              ...post,
+              reactions: {
+                ...post.reactions,
+                likes: post.reactions.likes + 1,
+                liked: true
+              }
+            };
+          }
+      }else{
+        return post;
+      }
+    })
+  );
+}
+
+
+
+function addModalPost(event) {
   event.preventDefault();
 
-  const newModalPost = [
-    ...social,
-    {
-      name: 'Joshua Andres',
-      email: '@JoshuaAndres',
-      profile: BulaguiImg,
-      caption: inputPost,
-      post: BulaguiLoveSophia,
-      reactions: {
-      likes: 2330,
-      comments: 948,
-      shares: 902
+  const newPost = {
+    name: `${saveUsername.first} ${saveUsername.last}`,
+    email: `${saveUsername.first}${saveUsername.last}`,
+    profile: JoshuaImg,
+    caption: inputPost,
+    post: BulaguiLoveSophia,
+    reactions: {
+      likes: 0,
+      comments: 0,
+      shares: 0
     },
     id: crypto.randomUUID()
-    }
-  ]
-  setSocial(newModalPost);
+  };
+
+  setSocial(prevSocial => [
+    newPost,      // 👈 goes to index 0
+    ...prevSocial // old posts move down
+  ]);
+
   closeModal();
 }
+
 
   return (
     
@@ -182,7 +128,12 @@ function addModalPost(event) {
               <div className="user-modal-name">
                 <img src={JoshuaImg} className="user-post-image"></img>
                 <div className="user-container-modal">
-                  <p className="modal-user-name">Joshua Andres</p>
+                  <p className="modal-user-name">
+                    {saveUsername.first} {saveUsername.last}
+                    {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+                    ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
+                    : null}
+                  </p>
                   <p className="modal-sub-name">@JoshuaAndres</p>
                 </div>
               </div>
@@ -234,10 +185,7 @@ function addModalPost(event) {
             <FaVideo />
             </button>
           </div>
-
-            
-
-                    
+                              
     
                     <div className="social-media-myday">                 
                       <div className="joshuastories">
@@ -269,7 +217,11 @@ function addModalPost(event) {
                                  <div className="user-image-container">
                                    <img src={media.image} className="user-post-image"></img>
                                       <div>
-                                          <p>{media.name}</p>
+                                          <p>{media.name}
+                                              {media.name === 'Joshua Andres' 
+                                              ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
+                                              : null}
+                                          </p>
                                           <p className="user-email-element">{media.email} 2h</p>
                                       </div>
                                    <button className="user-button-element">...</button>
@@ -284,7 +236,15 @@ function addModalPost(event) {
                                  </div>
                      
                                  <div className="user-profile-reaction-container">
-                                    <p><FaHeart/> {media.reactions.likes}</p>
+                                    <p>
+                                      <FaHeart 
+                                        onClick={() => addOne(media.id)}
+                                        className={
+                                         `heart-icon ${media.reactions.liked ? 'liked' : '' }`}
+                                      /> 
+                                      {media.reactions.likes}
+                                    </p>
+
                                     <p><FaRegComment/> {media.reactions.comments}</p>
                                     <p><FaShare/> {media.reactions.shares}</p>
                                  </div>

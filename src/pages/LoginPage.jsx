@@ -2,10 +2,11 @@ import { Link, useNavigate } from 'react-router';
 import { useState } from 'react';
 import './LoginPage.css';
 
-export function LoginPage({userData}) {
+export function LoginPage({userData, setSaveUsername}) {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); 
+  
 
   function UsernameInput(event) {
     setUser(event.target.value)
@@ -18,13 +19,22 @@ export function LoginPage({userData}) {
   function SubmitInput(event) {
     event.preventDefault()
 
-    const isValidUser = userData.some((dataUser) => dataUser.username === user && dataUser.password === password ); 
-      
-      if(isValidUser) {
+    const matchedUser = userData.find(dataUser =>
+      user === dataUser.username &&
+      password === dataUser.password
+    );
+
+    if (matchedUser) {
+      const usersName = {
+        first: matchedUser.firstname,
+        last: matchedUser.lastname
+      };
+
+      setSaveUsername(usersName);
       navigate('/social');
-      }else{
-        alert('Username or Password is incorrect')
-      }
+    }
+      
+      
       
     }
 

@@ -24,7 +24,11 @@ import { BsPatchCheckFill } from "react-icons/bs";
 import { useNavigate, Link } from "react-router";
 import './ProfilePage.css';
 import { useState } from 'react';
-export function ProfilePage() {
+export function ProfilePage({
+  saveUsername,
+  social,
+  setSocial
+ }) {
 
   const navigate = useNavigate();
   
@@ -46,13 +50,17 @@ export function ProfilePage() {
     }
   }
 
+  function enterPost(event) {
+    console.log(event.target.value);
+  }
+
   return (
     <>
     <title>LinkUp</title>
     <div className="profile-container-body">
 
       <button
-        className="back-button"
+        className="back-button-profile"
         onClick={() => navigate(-1)}
       >
         <FaArrowLeft size={20} color="white" />
@@ -69,9 +77,13 @@ export function ProfilePage() {
       {openPhoto && (
       <div 
         className="modal-overlay" 
-        onClick={exitChangePhoto} // closes if you click anywhere on overlay
-      >
-        <div className="change-photo-container">
+        onClick={exitChangePhoto} 
+       >
+        <div 
+         className="change-photo-container" 
+         onClick={(e) => e.stopPropagation()}
+         >
+          
           <Link className="photo-link" onClick={exitChangePhoto}>
           <FaEye style={{ marginRight: "8px" }} />
           View Story
@@ -90,8 +102,15 @@ export function ProfilePage() {
       </div>
       )}
         
-        <h1>Joshua Andres  <BsPatchCheckFill color="#1DA1F2" /></h1>
-        <p>@JoshuaAndres</p>
+        <h1>
+          {saveUsername.first} {saveUsername.last}
+
+          {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+            ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
+            : null}
+        </h1>
+
+        <p>@{saveUsername.first}{saveUsername.last}</p>
         <p>Web Developer | Tech Enthusiast</p>
 
         <div className="follow-container">
@@ -149,87 +168,55 @@ export function ProfilePage() {
          </div>
 
           <div className="post-container-profile">
-          <input placeholder="What's on your mind?" className="input-element"></input>
-          <button>Post</button>
-          </div>
 
-          <div className="profile-post-container">
-            <div className="profile-image-container">
-              <img src={JoshuaImg} className="profile-post-image"></img>
-              <div>
-                <p>Joshua Andres</p>
-                <p className="email-element">@JoshuaAndres 2h</p>
-              </div>
-              <button className="button-element">...</button>
-            </div>
-
-            <div className="profile-caption-container">
-              <p>tite kanaman gnweignoiwenognweubgnwenb fmewpgmpewnginweiogniowengingeiwengiwingeingoweno</p>
-            </div>
-
-            <div className="profile-user-post-container">
-              <img src={GalaxyImg} className="galaxy-container"/>
-            </div>
-
-            <div className="profile-reaction-container">
-              <p><FaHeart/> 1.3k</p>
-              <p><FaRegComment/> 256</p>
-              <p><FaShare/> 82</p>
-            </div>
-          </div>
-
-          <div className="profile-post-container">
-            <div className="profile-image-container">
-              <img src={JoshuaImg} className="profile-post-image"></img>
-              <div>
-                <p>Joshua Andres</p>
-                <p className="email-element">@JoshuaAndres 2h</p>
-              </div>
-              <button className="button-element">...</button>
-            </div>
-
-            <div className="profile-caption-container">
-              <p>tite kanaman gnweignoiwenognweubgnwenb fmewpgmpewnginweiogniowengingeiwengiwingeingoweno</p>
-            </div>
-
-            <div className="profile-user-post-container">
-              <img src={GalaxyImg} className="galaxy-container"/>
-            </div>
-
-            <div className="profile-reaction-container">
-              <p><FaHeart/> 1.3k</p>
-              <p><FaRegComment/> 256</p>
-              <p><FaShare/> 82</p>
-            </div>
-          </div>
-
-          <div className="profile-post-container">
-            <div className="profile-image-container">
-              <img src={JoshuaImg} className="profile-post-image"></img>
-              <div>
-                <p>Joshua Andres</p>
-                <p className="email-element">@JoshuaAndres 2h</p>
-              </div>
-              <button className="button-element">...</button>
-            </div>
-
-            <div className="profile-caption-container">
-              <p>tite kanaman gnweignoiwenognweubgnwenb fmewpgmpewnginweiogniowengingeiwengiwingeingoweno</p>
-            </div>
-
-            <div className="profile-user-post-container">
-              <img src={GalaxyImg} className="galaxy-container"/>
-            </div>
-
-            <div className="profile-reaction-container">
-              <p><FaHeart/> 1.3k</p>
-              <p><FaRegComment/> 256</p>
-              <p><FaShare/> 82</p>
-            </div>
-          </div>
-
+          <input 
+           placeholder="What's on your mind?" 
+           className="input-element"
+           onChange={enterPost}>
           
-        
+           </input>
+          <button>Post</button>
+
+          </div>
+
+          {social.map((ownerPost) => {
+            const fullname = `${saveUsername.first} ${saveUsername.last}`
+
+            if(fullname === ownerPost.name) {
+              return (
+              <div className="profile-post-container">
+              <div className="profile-image-container">
+                <img src={ownerPost.profile} className="profile-post-image"></img>
+                <div>
+                  <p>
+                    {ownerPost.name}
+                    {ownerPost.name === 'Joshua Andres' 
+                    ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
+                    : null}
+                  </p>
+                  <p className="email-element">{ownerPost.email} 2h</p>
+                </div>
+                <button className="button-element">...</button>
+              </div>
+
+              <div className="profile-caption-container">
+                <p>{ownerPost.caption}</p>
+              </div>
+
+              <div className="profile-user-post-container">
+                <img src={ownerPost.post} className="galaxy-container"/>
+              </div>
+
+              <div className="profile-reaction-container">
+                <p><FaHeart/> {ownerPost.reactions.likes}</p>
+                <p><FaRegComment/> {ownerPost.reactions.comments}</p>
+                <p><FaShare/> {ownerPost.reactions.shares}</p>
+              </div>
+            </div>
+              );
+            }
+          })}
+
         </div>
 
         
@@ -245,7 +232,7 @@ export function ProfilePage() {
             <div className="online-friends-container">
               <img src={JoshuaImg} className="profile-post-image"/>
               <div className="online-friends-name">
-                <p>Joshua Andres</p>
+                <p>{saveUsername.first} {saveUsername.last}</p>
                 <p className="status-element">Online</p>
               </div>
             </div>
