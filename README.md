@@ -1,45 +1,78 @@
-LinkUp
+<div align="center">
 
-LinkUp is a Facebook-inspired social media web application where users can create profiles, share posts, interact with others, and connect through a modern, responsive interface. It is built using React and Vite, focusing on smooth UI interactions and real-time social experiences.
+#  LinkUp
 
-Features
+A Facebook-inspired social media web application built with **React** and **Vite**
 
-User authentication and profiles
+[![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-fast-yellow?logo=vite)](https://vitejs.dev/)
+[![Status](https://img.shields.io/badge/Status-In%20Development-orange)](#)
 
-Create, edit, and delete posts
+</div>
 
-Like, comment, and share posts
+---
 
-Social media feed (similar to Facebook timeline)
+##  Overview
 
-Profile pictures and personal posts
+**LinkUp** is a Facebook-inspired social media web application where users can create profiles, share posts, interact with others, and connect through a modern, responsive interface.
 
-Messaging UI (chat-style interface)
+Built with **React** and **Vite**, LinkUp focuses on smooth UI interactions and simulates real-time social media experiences while following modern front-end best practices.
 
-Responsive design for desktop and mobile
+---
 
-Tech Stack
+##  Features
 
-HTML
+-  User authentication and profile management  
+-  Create, edit, and delete posts  
+-  Like, comment, and share posts  
+-  Facebook-style social media feed  
+-  Profile pictures and personal posts  
+-  Messaging UI (chat-style interface)  
+-  Fully responsive design (desktop & mobile)
 
-CSS
+---
 
-JavaScript
+##  Tech Stack
 
-React
+- **HTML**
+- **CSS**
+- **JavaScript**
+- **React**
+- **Vite**
 
-Vite
+---
 
-Getting Started
+##  Getting Started
 
-Install dependencies
+### Prerequisites
+- Node.js (v16 or higher)
+- npm
+
+### Installation
 npm install
 
-Run the development server
+### Run the development server
 npm run dev
 
-The app will be available at:
+The application will be available at:  
 http://localhost:5173
 
-Project Goal
-The goal of LinkUp is to simulate the core features of a modern social media platform (similar to Facebook) while practicing front-end development concepts such as component-based architecture, state management, and UI design.
+---
+
+##  Project Goal
+
+The goal of **LinkUp** is to simulate the core features of a modern social media platform (similar to Facebook) while improving skills in:
+
+- Component-based architecture  
+- State management in React  
+- UI/UX design  
+- Responsive web development  
+
+---
+
+##  Author
+
+**Joshua Andres**  
+Graduating IT student | Aspiring Front-End Developer  
+
+GitHub: @Joshylicious-hub
