@@ -16,6 +16,9 @@ import BulaguiImg from '../images/bulagui.jpg';
 import NiverioImg from '../images/niverio.jpg';
 import SophiaImg from '../images/sophia.jpg';
 import BulaguiLoveSophia from '../images/bulaguilovesophia.png';
+import ProfessionalImg from '../images/professional.jpg';
+
+
 
  
 export function SocialMedia({
@@ -25,7 +28,9 @@ export function SocialMedia({
   inputPost,
   setInputPost,
   social,
-  setSocial
+  setSocial,
+  isLoading,
+  setIsLoading
   }) {
 
 
@@ -41,13 +46,43 @@ function inputModal(event) {
 setInputPost(event.target.value);
 }
 
+function addModalPost(event) {
+  event.preventDefault();
+
+  const newPost = {
+    name: `${saveUsername.first} ${saveUsername.last}`,
+    email: `${saveUsername.first}${saveUsername.last}`,
+    profile: ProfessionalImg,
+    caption: inputPost,
+    post: BulaguiLoveSophia,
+    reactions: {
+      likes: 0,
+      comments: 0,
+      shares: 0
+    },
+    id: crypto.randomUUID()
+  };
+
+  setIsLoading(true);
+
+  setTimeout(() => {
+    setSocial(prevSocial => [
+    newPost,      // 👈 goes to index 0
+    ...prevSocial // old posts move down
+  ]);
+  setIsLoading(false);
+  closeModal();
+  }, 2000)
+  
+}
+
 function addOne(id) {
   setSocial(prevSocial =>
     prevSocial.map(post => {
 
     if (post.id === id) {      
-       if (post.reactions.liked) {// check if already liked
-        return { // if liked, unlike and subtract 1
+       if (post.reactions.liked) {
+        return { 
           ...post,
           reactions: {
             ...post.reactions,
@@ -55,7 +90,7 @@ function addOne(id) {
             liked: false
           }
           };
-        } else { // if not liked, like and add 1
+        } else { 
             return {
               ...post,
               reactions: {
@@ -72,35 +107,44 @@ function addOne(id) {
   );
 }
 
+function sharePost(id) {
+  const postId = id;
+  
+  social.forEach((shareId) => {    
+    if(postId === shareId.id) {
+      const newSharePost = {
+      name: shareId.name,
+      email: shareId.email,
+      profile: shareId.profile,
+      caption: shareId.caption,
+      image: shareId.image,
+      post: shareId.post,
+      reactions: {
+        likes: shareId.reactions.likes,
+        comments: shareId.reactions.comments,
+        shares: shareId.reactions.shares,
+        liked: shareId.reactions.liked
+      },
+      id: crypto.randomUUID() 
+    }
+    
+  setIsLoading(true);
 
-
-
-
-
-function addModalPost(event) {
-  event.preventDefault();
-
-  const newPost = {
-    name: `${saveUsername.first} ${saveUsername.last}`,
-    email: `${saveUsername.first}${saveUsername.last}`,
-    profile: JoshuaImg,
-    caption: inputPost,
-    post: BulaguiLoveSophia,
-    reactions: {
-      likes: 0,
-      comments: 0,
-      shares: 0
-    },
-    id: crypto.randomUUID()
-  };
-
-  setSocial(prevSocial => [
-    newPost,      // 👈 goes to index 0
-    ...prevSocial // old posts move down
+  setTimeout(() => {
+    setSocial(prevSocial => [
+    newSharePost,      
+    ...prevSocial 
   ]);
-
-  closeModal();
+  setIsLoading(false);
+  }, 2000)
+    
+  
+    }
+    
+  })
 }
+
+
 
 
   return (
@@ -110,15 +154,16 @@ function addModalPost(event) {
         <div className="social-media-container">
           
           <div className="social-media-post">
-            <img src={JoshuaImg} className="profilePicture"/>
+            <img src={ProfessionalImg} className="profile-picture"/>
+
             <input 
             placeholder="Share your thoughts" 
             className="insertPost"
             onClick={postModal}/>
 
           {showModal && (
-          <div className="modal-overlay" onClick={closeModal}>
-            <div className="background-modal"  onClick={(e) => e.stopPropagation()}>
+            <div className="post-modal-overlay" onClick={closeModal}>
+             <div className="background-modal"  onClick={(e) => e.stopPropagation()}>
               
               <div className="modal-container">
                 <p className="modal-title">Create Post</p>
@@ -129,7 +174,7 @@ function addModalPost(event) {
                 </button>
               </div>
               <div className="user-modal-name">
-                <img src={JoshuaImg} className="user-post-image"></img>
+                <img src={ProfessionalImg} className="user-post-image"></img>
                 <div className="user-container-modal">
                   <p className="modal-user-name">
                     {saveUsername.first} {saveUsername.last}
@@ -179,6 +224,13 @@ function addModalPost(event) {
             </div>)
                     }
 
+                    {isLoading && (
+                      <div className="loading-overlay">
+                        <div className="spinner"></div>
+                        <p>Posting</p>
+                      </div>
+                    )}
+
             <button 
             type="submit" className="send-btn">
             <FaCamera />
@@ -192,7 +244,7 @@ function addModalPost(event) {
     
                     <div className="social-media-myday">                 
                       <div className="joshuastories">
-                      <img src={JoshuaImg} className="dayStories"/>
+                      <img src={ProfessionalImg} className="dayStories"/>
                       <p>Joshua Andres  </p>
                       </div>
     
@@ -248,8 +300,16 @@ function addModalPost(event) {
                                       {media.reactions.likes}
                                     </p>
 
-                                    <p><FaRegComment/> {media.reactions.comments}</p>
-                                    <p><FaShare/> {media.reactions.shares}</p>
+                                    <p>
+                                      <FaRegComment/>
+                                      {media.reactions.comments}
+                                    </p>
+
+                                    <p>
+                                      <FaShare
+                                        onClick={() => sharePost(media.id)}/> 
+                                      {media.reactions.shares}
+                                    </p>
                                  </div>
                        </div>
                     );

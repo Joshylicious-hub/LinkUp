@@ -3,10 +3,17 @@ import { ProfilePost } from '../components/ProfilePost';
 import { ProfileAlbum } from '../components/ProfileAlbum';
 import './ProfilePage.css';
 
+
 export function ProfilePage({
   saveUsername,
   social,
-  setSocial
+  setSocial,
+  showModal,
+  setShowModal,
+  inputPost,
+  setInputPost,
+  isLoading,
+  setIsLoading
  }) {
 
   return (
@@ -25,6 +32,12 @@ export function ProfilePage({
       social={social}
       saveUsername={saveUsername}
       setSocial={setSocial}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      inputPost={inputPost}
+      setInputPost={setInputPost}
+      isLoading={isLoading}
+      setIsLoading={setIsLoading}
       />
 
         

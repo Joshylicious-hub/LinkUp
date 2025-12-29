@@ -8,13 +8,14 @@ import AngelicaImg from '../images/angelica.jpg';
 import { Link } from 'react-router';
 import { useState } from 'react';
 import { BsPatchCheckFill } from "react-icons/bs";
+import ProfessionalImg from '../images/professional.jpg';
 
 export function SocialRightNavBar({saveUsername}) {
   const [profileLinks, setProfileLinks] = useState([{
     image: CyrilImg,
     name: 'Cyril Vicente'
   }, {
-    image: JoshuaImg,
+    image: ProfessionalImg,
     name: 'Joshua Andres'
   }, {
     image: BulaguiImg,
@@ -34,7 +35,7 @@ export function SocialRightNavBar({saveUsername}) {
 
       <div className="profile-socialpage">
         <Link to="/profile">
-          <img src={JoshuaImg}
+          <img src={ProfessionalImg}
           className="profilePicture"/>
           {saveUsername.first} {saveUsername.last}
           {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'

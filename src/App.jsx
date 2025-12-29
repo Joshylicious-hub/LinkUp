@@ -12,8 +12,10 @@ import BulaguiImg from './images/bulagui.jpg';
 import NiverioImg from './images/niverio.jpg';
 import SophiaImg from './images/sophia.jpg';
 import BulaguiLoveSophia from './images/bulaguilovesophia.png';
+import ProfessionalImg from './images/professional.jpg';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [inputPost, setInputPost] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [saveUsername, setSaveUsername] = useState({});
@@ -32,25 +34,11 @@ function App() {
 }]);
 
 const [social, setSocial] = useState([{
-  name: 'Justine Bulagui',
-  email: '@JustineBulagui',
-  profile: BulaguiImg,
-  caption: 'Love na love ko si Sophia Bautista soon to be Sophia Bautista Bulagui 💖',
-  image: BulaguiImg,
-  post: BulaguiLoveSophia,
-  reactions: {
-    likes: 2330,
-    comments: 948,
-    shares: 902,
-    liked: false
-  },
-  id: crypto.randomUUID()
-}, {
   name: 'Joshua Andres',
   email: '@JoshuaAndres',
   profile: JoshuaImg,
-  caption: 'testing to build a facebook',
-  image: JoshuaImg,
+  caption: 'testing lamang ito',
+  image: ProfessionalImg,
   post: JoshuaImg,
   reactions: {
     likes: 1300,
@@ -161,6 +149,8 @@ const [social, setSocial] = useState([{
         setInputPost={setInputPost}
         social={social}
         setSocial={setSocial}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
      />}></Route>
 
      <Route path="/profile" 
@@ -168,6 +158,12 @@ const [social, setSocial] = useState([{
       saveUsername={saveUsername}
       social={social}
       setSocial={setSocial}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      inputPost={inputPost}
+      setInputPost={setInputPost}
+      isLoading={isLoading}
+      setIsLoading={setIsLoading}
     />}></Route>
 
      <Route path="/message"

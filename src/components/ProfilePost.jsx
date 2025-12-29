@@ -6,17 +6,76 @@ FaUser,
 FaMapMarkerAlt,
 FaGlobe,
 FaCalendarAlt,
+FaVideo,
+FaCamera,
+FaSmile,
+FaPoll, 
+FaUserTag  
 } from "react-icons/fa";
 import { BsPatchCheckFill } from "react-icons/bs";
+import JoshuaImg from '../images/joshua.jpg';
+import BulaguiLoveSophia from '../images/bulaguilovesophia.png';
+
 
 export function ProfilePost({ 
   social, 
   saveUsername, 
-  setSocial
+  setSocial,
+  showModal,
+  setShowModal,
+  inputPost,
+  setInputPost,
+  isLoading,
+  setIsLoading
  }) {
 
-  function enterPost(event) {
-    console.log(event.target.value);
+  
+
+  function postModal() {
+    setShowModal(true);
+  }
+  
+  function closeModal() {
+    setShowModal(false);
+  }
+  
+  function inputModal(event) {
+  setInputPost(event.target.value);
+  }
+  
+  function addModalPost(event) {
+    event.preventDefault();
+  
+    const newPost = {
+      name: `${saveUsername.first} ${saveUsername.last}`,
+      email: `${saveUsername.first}${saveUsername.last}`,
+      profile: JoshuaImg,
+      caption: inputPost,
+      post: BulaguiLoveSophia,
+      reactions: {
+        likes: 0,
+        comments: 0,
+        shares: 0
+      },
+      id: crypto.randomUUID()
+    };
+
+    setIsLoading(true); 
+
+setTimeout(() => {
+  
+  setSocial(prevSocial => [
+    newPost,      // goes to index 0
+    ...prevSocial // old posts move down
+  ]);
+
+  setIsLoading(false); 
+  closeModal();        
+
+
+}, 2000); 
+
+  
   }
 
   function addOne(id) {
@@ -24,8 +83,8 @@ export function ProfilePost({
     prevSocial.map(post => {
 
     if (post.id === id) {      
-       if (post.reactions.liked) {// check if already liked
-        return { // if liked, unlike and subtract 1
+       if (post.reactions.liked) {
+        return { 
           ...post,
           reactions: {
             ...post.reactions,
@@ -33,7 +92,7 @@ export function ProfilePost({
             liked: false
           }
           };
-        } else { // if not liked, like and add 1
+        } else { 
             return {
               ...post,
               reactions: {
@@ -92,10 +151,80 @@ export function ProfilePost({
               <input 
                placeholder="What's on your mind?" 
                className="input-element"
-               onChange={enterPost}>
-              
-               </input>
-              <button>Post</button>
+               onClick={postModal}>
+                 </input>
+
+                {showModal && (
+                  <div className="profile-modal-overlay" onClick={closeModal}>
+                    <div className="profile-background-modal"  onClick={(e) => e.stopPropagation()}>
+                      
+                      <div className="profile-modal-container">
+                        <p className="profile-modal-title">Create Post</p>
+                        <button 
+                        className="profile-close-btn"
+                        onClick={closeModal}>
+                        X
+                        </button>
+                      </div>
+                      <div className="profile-user-modal-name">
+                        <img src={JoshuaImg} className="user-post-image"></img>
+                        <div className="profile-user-container-modal">
+                          <p className="profile-modal-user-name">
+                            {saveUsername.first} {saveUsername.last}
+                            {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+                            ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
+                            : null}
+                          </p>
+                          <p className="profile-modal-sub-name">@JoshuaAndres</p>
+                        </div>
+                      </div>
+        
+                      <div className="profile-user-modal-input">
+                        <textarea
+                          placeholder="What's on your mind?"
+                          className="profile-user-modal-input-element"
+                          onChange={inputModal}
+                        />
+                      </div>
+        
+                      <div className="profile-name-modal-user-post-container">
+                        <img src={BulaguiLoveSophia} className="profile-post-modal-container"/>
+                      </div>
+        
+                      <div className="profile-post-modal-icons">
+                        <button className="profile-post-icon-btn">
+                          <FaCamera style={{ color: "#4caf50" }} /> {/* Add Photo */}
+                        </button>
+                        <button className="profile-post-icon-btn">
+                          <FaVideo style={{ color: "#f44336" }} /> {/* Add Video */}
+                        </button>
+                        <button className="profile-post-icon-btn">
+                          <FaSmile style={{ color: "#ff9800" }} /> {/* Add Emoji */}
+                        </button>
+                        <button className="profile-post-icon-btn">
+                          <FaPoll style={{ color: "#2196f3" }} /> {/* Create Poll */}
+                        </button>
+                        <button className="profile-post-icon-btn">
+                          <FaUserTag style={{ color: "#9c27b0" }} /> {/* Tag Someone */}
+                        </button>
+                      </div>
+        
+                      <div className="profile-post-button-modal-container">
+                        <button 
+                        onClick={addModalPost}>Post</button>
+                      </div>
+                        </div>
+                    </div>)
+                            }
+
+                            {isLoading && (
+                              <div className="loading-overlay">
+                                <div className="spinner"></div>
+                                <p>Posting</p>
+                              </div>
+                            )}
+
+              <button className="post-button">Post</button>
     
               </div>
     

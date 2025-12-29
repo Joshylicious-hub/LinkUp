@@ -53,7 +53,7 @@ export function ProfileBackground({ saveUsername }) {
 
       {openPhoto && (
       <div 
-        className="modal-overlay" 
+        className="open-modal-overlay" 
         onClick={exitChangePhoto} 
        >
         <div 

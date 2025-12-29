@@ -13,7 +13,9 @@ export function SocialPage({
   inputPost,
   setInputPost,
   social,
-  setSocial
+  setSocial,
+  isLoading,
+  setIsLoading
   }) {
   console.log(userData);
   return (
@@ -33,6 +35,8 @@ export function SocialPage({
       setInputPost={setInputPost}
       social={social}
       setSocial={setSocial}
+      isLoading={isLoading}
+      setIsLoading={setIsLoading}
      />
 
     <SocialRightNavBar 

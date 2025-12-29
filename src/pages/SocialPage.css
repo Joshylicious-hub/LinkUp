@@ -156,7 +156,7 @@ background-color: #f0f2f5;
   padding-left: 20px;
   padding-right: 100px;
   font-size: 18px;
-  background-color: rgba(232, 226, 226, 0.797);
+  background-color: rgb(241, 236, 236);
   border: none;
   width: 100%;
   font-family: 'Poppins', sans-serif;
@@ -164,6 +164,9 @@ background-color: #f0f2f5;
 }
 .insertPost {
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.insertPost:hover {
+  background-color: rgb(225, 221, 221);
 }
 
 .insertPost:focus {
@@ -178,7 +181,7 @@ background-color: #f0f2f5;
 /* =========================
    MODAL OVERLAY
 ========================= */
-.modal-overlay {
+.post-modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
@@ -910,10 +913,15 @@ background-color: #f0f2f5;
 
 
 .profilePicture {
-  width: 55px;
-  height: 55px;           /* make sure it’s a square */
+  width: 50px;
+  height: 50px;           /* make sure it’s a square */
   border-radius: 50%;      /* circular image */
   
+}
+.profile-picture {
+  width: 85px;
+  height: 55px;           /* make sure it’s a square */
+  border-radius: 100%;
 }
 
 .profile-socialpage a {
@@ -941,17 +949,4 @@ background-color: #f0f2f5;
   margin-left: 3px;
 }
 
-.heart-icon {
-  color: #65676b;
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.15s ease;
-}
 
-.heart-icon.liked {
-  color: #e0245e;
-  transform: scale(1.1);
-}
-
-.heart-icon:active {
-  transform: scale(0.9);
-}

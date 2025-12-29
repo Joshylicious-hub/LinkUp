@@ -275,9 +275,15 @@ body {
   border-radius: 20px;
   border: 1px solid #ccd0d5;
   font-size: 14px;
+  cursor: pointer;
+  background-color: rgb(241, 236, 236);
+  border: none;
+}
+.input-element:hover {
+  background-color: rgb(225, 221, 221);
 }
 
-.post-container-profile button {
+.post-container-profile .post-button {
   background: #4267B2;
   color: white;
   border: none;
@@ -349,9 +355,9 @@ body {
 /* =========================
    POST IMAGE
 ========================= */
-.profile-user-post-container {
+.user-post-container {
   width: 100%;
-  max-height: 400px;
+  max-height: 500px;
   overflow: hidden;
 }
 
@@ -624,27 +630,31 @@ border-radius: 12px;
     inset 0 1px 2px rgba(255, 255, 255, 0.2);
 }
 
-.modal-overlay {
-  position: absolute;
+.open-modal-overlay {
+  position: absolute; /* cover whole screen */
   top: 0;
   left: 0;
-  height: 100vh;
-  background: transparent;/* semi-transparent overlay */
+  width: 100%;
+  height: 100%;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 3000; /* above other elements */
 }
 
 .change-photo-container {
-  position: absolute;
+  position: absolute; /* absolute inside the overlay */
   top: 130px;
-  right: 405px;
+  right: 400px;
   background-color: white;
-  z-index: 2000;
+  z-index: 3100;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 12px;
+  min-width: 250px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
+
 
 .photo-link {
   display: flex;
@@ -660,3 +670,215 @@ border-radius: 12px;
 .photo-link:hover {
   background-color: #f0f0f0;
 }
+
+
+
+
+
+
+
+
+.profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+/* =========================
+   MODAL CARD
+========================= */
+.profile-background-modal {
+  background-color: #ffffff;
+  border-radius: 14px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: modalFade 0.2s ease-out;
+}
+
+/* Smooth entrance animation */
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================
+   MODAL HEADER
+========================= */
+.profile-modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px;
+  position: relative;
+  border-bottom: 1px solid #e4e6eb;
+  background: #ffffff;
+}
+
+.profile-modal-title {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #050505;
+  margin: 0;
+}
+
+/* Close button */
+.profile-close-btn {
+  position: absolute;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 30%;
+  border: none;
+  background: #e4e6eb;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.profile-close-btn:hover {
+  background-color: #d8dadf;
+}
+
+/* =========================
+   USER INFO
+========================= */
+.profile-user-modal-name {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-user-container-modal {
+  flex-grow: 1;
+}
+
+.profile-modal-user-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #050505;
+}
+
+.profile-modal-sub-name {
+  font-size: 12px;
+  color: #65676b;
+}
+
+/* =========================
+   TEXT INPUT
+========================= */
+.profile-user-modal-input {
+  padding: 8px 16px;
+}
+
+.profile-user-modal-input-element {
+  width: 100%;
+  min-height: 90px;
+  border: none;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  color: #050505;
+  resize: none;
+  outline: none;
+}
+
+.profile-user-modal-input-element::placeholder {
+  color: #65676b;
+}
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+.profile-name-modal-user-post-container {
+  margin: 0 16px;
+  max-height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f0f2f5;
+}
+
+.profile-post-modal-container {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================
+   ACTION ICONS
+========================= */
+.profile-post-modal-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  margin: 12px 16px;
+  border: 1px solid #e4e6eb;
+  border-radius: 10px;
+  background-color: #f7f8fa;
+}
+
+.profile-post-icon-btn {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.profile-post-icon-btn:hover {
+  background-color: #e4e6eb;
+  transform: scale(1.05);
+}
+
+/* =========================
+   POST BUTTON
+========================= */
+.profile-post-button-modal-container {
+  padding: 12px 16px 16px;
+  display: flex;
+}
+
+.profile-post-button-modal-container button {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background-color: #1877f2;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.profile-ost-button-modal-container button:hover {
+  background-color: #166fe5;
+}
+
+
+
+
+
+
+

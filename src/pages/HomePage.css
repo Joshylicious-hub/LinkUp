@@ -1,74 +1,244 @@
-
 * {
   margin: 0;
   padding: 0;
-   box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  scroll-behavior: smooth;
 }
 
 .navbar-homepage {
-  display: flex; /*Align ang (logo, links, button) sa row.*/
-  justify-content: space-between; /*Puts first item left, last item right, links in the middle.*/
-  align-items: center; /*vertical na nakagitna ang mga items.*/
-  padding: 1rem 2rem; /*space sa navbar(top/bottom 1rem, right/left 2 rem*/
-  background-color: black; 
-  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  min-height: 70px;
+  background: linear-gradient(135deg, #0a7eeb 15%, #a78ceb 30%, #f58282 100%);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-homepage .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: white;
 }
 
 .navbar-homepage ul {
-  list-style: none; /*para matanggal yung bullets sa <ul>*/
-  display: flex; /*para naka row yung <li> sa loob ng <ul> para hindi naka vertical*/
-  gap: 2rem; /*para mas spacing sa mga menu items*/
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+  margin-left: 3rem;
 }
 
 .navbar-homepage ul li {
-  cursor: pointer; /*para kapag tinapat ang mouse sa links magiging pointer hand*/
-  font-weight: 500; /*medium font para mas readable*/
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding: 0.75rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.navbar-homepage ul li:hover { /*para kapag pinoint sa link mag iiba ang kulay */
-   color: #f0a500;
+.navbar-homepage ul li.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.8rem;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px 2px 0 0;
 }
 
-.navbar-homepage button {
-  padding: 0.5rem 1rem; /*magkaroon ng space sa loob ng button (0.5 rem top/bottom, 1rem right/left*/
-  background-color: #f0a500;
-  border: none; /*pang tanggal ng border line*/
-  border-radius: 5px; /*para magkaroon ng radius yung button*/
-  font-weight: bold; /*para thick ang font*/
-  cursor: pointer; /*para kapag tinapat nakaturo*/
-  transition: background-color 0.3s; /*para kapag hinover hindi agad agad mag iiba kulay para smooth ang animation or delay yung pag papakita ng background color*/
+.navbar-homepage ul li:hover {
+  color: #ffe3a3;
+  transform: translateY(-2px);
 }
 
-.navbar-homepage button:hover {
-  background-color: #d18b00;
+.navbar-homepage ul li.active {
+  font-weight: 600;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.auth-buttons .login-button,
+.auth-buttons .signup-button,
+.signUpButton,
+.learnMoreButton {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  border: none;
+}
+
+.auth-buttons .login-button {
+  background-color: #5b5fee;
+  color: white;
+  padding: 0.55rem 1.3rem;
+}
+
+.auth-buttons .login-button:hover {
+  background-color: #4a50d4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.auth-buttons .signup-button {
+  background-color: #e801e8;
+  color: white;
+  padding: 0.55rem 1.3rem;
+}
+
+.auth-buttons .signup-button:hover {
+  background-color: #b400b4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 .background {
-  display: flex; 
-  align-items: center; /*center vertical*/
-  justify-content: center; /* center horizontally */
-  background-color: red;
-  height: calc(100vh - 65px); /*minus sa navbar height*/
-}
-.headerParagraph {
-  background-color: blue;
-  max-width: 450px;
-  display: flex;           /* make it flex */
-  flex-direction: column;  /*para naka vertical ang children o element sa loob ng div */
-  align-items: center;     /*para naka center horizontally*/
-  justify-content: center; /*para naka center sa vertical*/
-  padding: 1rem;           /*para may spacing sa loob ng div*/
-  text-align: center;      /*para naka center ang text sa loob/child*/
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 70px);
+  padding: 2rem;
+  background: linear-gradient(135deg, #0a7eeb 0%, #a78ceb 20%, #f58282 100%);
+  overflow: hidden;
 }
 
-.headerParagraph .firstParagraph {
-  font-size: 50px;
-   
+.background::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.15" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,202.7C960,203,1056,149,1152,122.7C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 110%;
+  height: 55%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.08" d="M0,96L48,122.7C96,149,192,203,288,208C384,213,480,171,576,138.7C672,107,768,85,864,101.3C960,117,1056,171,1152,181.3C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.headerContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.headerParagraph {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.firstParagraph {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.header-container h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+.header-container p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 500px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.headerButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.signUpButton {
+  background-color: #5b5fee;
+  color: white;
+  padding: 0.75rem 1.5rem;
+}
+
+.signUpButton:hover {
+  background-color: #4a50d4;
+  transform: translateY(-2px);
+}
+
+.learnMoreButton {
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+  padding: 0.75rem 1.5rem;
+}
+
+.learnMoreButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.headerImage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerImage img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
 }
 
 .footer {
@@ -90,6 +260,7 @@
   color: white;
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .footer-links li a:hover {
@@ -111,17 +282,38 @@
   height: 24px;
 }
 
-
-
-/*Mobile version styling para responsive sa mobile*/
-
-@media(max-width: 768px) {
-  nav ul {
-    flex-direction: column; /*para kapag lumiit ang screen naka column */
-    gap: 1rem; /*para may space */
+@media(max-width: 900px) {
+  .headerContent {
+    flex-direction: column;
+    text-align: center;
   }
 
-  .headerParagraph .firstParagraph {
-    font-size: 30px; /* smaller text on mobile */
+  .headerParagraph {
+    justify-content: center;
+  }
+
+  .header-container h1 {
+    font-size: 2.2rem;
+  }
+
+  .header-container p {
+    max-width: 100%;
+  }
+
+  .headerButtons {
+    justify-content: center;
+  }
+
+  .headerImage {
+    margin-top: 2rem;
+  }
+}
+
+@media(max-width: 768px) {
+  .navbar-homepage ul {
+    flex-direction: column;
+    gap: 1rem;
+    margin-left: 0;
+    margin-top: 1rem;
   }
 }

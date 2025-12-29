@@ -1,19 +1,26 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+
 
 export function NavBar() {
+  const navigate = useNavigate();
+
   return (
     <>
     <title>HomePage</title>
       <nav className="navbar-homepage">
         <div className="logo">LinkUp</div>
         <ul>
-          <li>Home</li>
+          <li className="active">Home</li>
           <li>About</li>
-          <li>Contact</li>
+          <li>Features</li>
+          <li>Support</li>
         </ul>
-        <Link to="/login">
-        <button>Log In</button>
-        </Link>
+        
+        <div className="auth-buttons">
+          <button onClick={() => navigate('/login')} className="login-button">Log In</button>
+          <button className="signup-button">Sign Up</button>
+        </div>
+        
       </nav>
 
     </>
