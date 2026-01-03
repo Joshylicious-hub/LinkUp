@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 export function Footer() {
   return (
@@ -10,10 +11,16 @@ export function Footer() {
       </ul>
       <p className="footer-copy">© 2025 LinkUp. All rights reserved.</p>
       <div className="footer-socials">
-        <Link to="#"><img src="/icons/facebook.svg" alt="Facebook" /></Link>
-        <Link to="#"><img src="/icons/twitter.svg" alt="Twitter" /></Link>
-        <Link to="#"><img src="/icons/instagram.svg" alt="Instagram" /></Link>
+        <Link to="#" className="facebook" aria-label="Facebook">
+          <FaFacebookF />
+        </Link>
+        <Link to="#" className="twitter" aria-label="Twitter">
+          <FaTwitter />
+        </Link>
+        <Link to="#" className="instagram" aria-label="Instagram">
+          <FaInstagram />
+        </Link>
       </div>
-      </footer>
+    </footer>
   );
 }

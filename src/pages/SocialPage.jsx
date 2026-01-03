@@ -15,7 +15,9 @@ export function SocialPage({
   social,
   setSocial,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  showComment,
+  setShowComment
   }) {
   console.log(userData);
   return (
@@ -37,6 +39,8 @@ export function SocialPage({
       setSocial={setSocial}
       isLoading={isLoading}
       setIsLoading={setIsLoading}
+      showComment={showComment}
+      setShowComment={setShowComment}
      />
 
     <SocialRightNavBar 

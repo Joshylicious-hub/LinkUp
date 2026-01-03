@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router';
+import { FaArrowLeft } from 'react-icons/fa';
+import  BackgroundImg  from '../images/background.png';
+
+
 import './SignupPage.css';
 
 export function SignupPage({userData, setUserData}) {
@@ -78,10 +82,26 @@ export function SignupPage({userData, setUserData}) {
   
 
   return (
+   
     <div className="signup-container">
+       <div className="signup-page">
+              <button
+                      className="signup-back-button-login"
+                      onClick={() => navigate(-1)}
+                    >
+                      <FaArrowLeft size={20} className="signup-back-arrow-color" />
+                    </button>
+              <img
+                src={BackgroundImg}
+                alt="Login illustration"
+                className="signup-image"
+              />
+            </div>
+      
 
       <form className="signup-form" onSubmit={confirmAccount}>
-        <h2>Sign Up</h2>
+        <h1>Create Your Account</h1>
+        <p>Join our community today!</p>
 
         <input placeholder="Enter First Name" 
         type="text"
@@ -118,5 +138,6 @@ export function SignupPage({userData, setUserData}) {
         </p>
       </form>
     </div>
+ 
   );
 }

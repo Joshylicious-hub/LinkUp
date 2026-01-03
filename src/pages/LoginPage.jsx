@@ -1,5 +1,8 @@
 import { Link, useNavigate } from 'react-router';
 import { useState } from 'react';
+import LoginImage from '../images/socialmedia.png';
+import TestImage from '../images/test.png';
+import { FaArrowLeft } from 'react-icons/fa';
 import './LoginPage.css';
 
 export function LoginPage({userData, setSaveUsername}) {
@@ -39,29 +42,59 @@ export function LoginPage({userData, setSaveUsername}) {
     }
 
    return (
-    <>
-    <Link to="/">Go back</Link>
-    <div className="form-container" >
-      <form className="form" onSubmit={SubmitInput}>
-        <h2>Log In</h2>
-
-        <input 
-        placeholder="Enter your username"
-        type="text"
-        onChange={UsernameInput} 
+     <div className="login-page-container">
+      <div className="login-page">
+        <button
+                className="back-button-login"
+                onClick={() => navigate(-1)}
+              >
+                <FaArrowLeft size={20} className="back-arrow-color" />
+              </button>
+        <img
+          src={TestImage}
+          alt="Login illustration"
+          className="login-image"
         />
+      </div>
 
-        <input placeholder="Enter your password"
-         type="password" 
-         onChange={PasswordInput}
-         />
+      <div className="form-container">
+        
+        <form className="form" onSubmit={SubmitInput}>
+          
+          <h1 className="welcome">Welcome!</h1>
+          <p>Please log in to your account</p>
 
-        <input type="submit"/>
-        <p className="signup-text">
-          Don't have an account?<Link to="/signup">Sign Up</Link>
-        </p>
-      </form>
+        <div className="input-group">
+          <input
+            type="text"
+            placeholder="Enter your username"
+            value={user}
+            onChange={e => setUser(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+
+          <div className="options">
+            <input type="checkbox" id="rememberMe" name="rememberMe" />
+            <label htmlFor="rememberMe" className="remember-me"> Remember Me</label>
+            <Link to="/forgot-password" className="forgot-password-link"> Forgot Password?</Link>
+          </div>
+
+          <button type="submit">Log In</button>
+        </div>
+
+          <p className="signup-text">
+            Don&apos;t have an account? <Link to="/signup">Sign Up</Link>
+          </p>
+        </form>
+      </div>
     </div>
-    </>
   );
 }

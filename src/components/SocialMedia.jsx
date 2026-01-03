@@ -30,7 +30,9 @@ export function SocialMedia({
   social,
   setSocial,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  showComment,
+  setShowComment
   }) {
 
 
@@ -144,7 +146,9 @@ function sharePost(id) {
   })
 }
 
-
+function addComment() {
+  setShowComment(true);
+}
 
 
   return (
@@ -160,76 +164,6 @@ function sharePost(id) {
             placeholder="Share your thoughts" 
             className="insertPost"
             onClick={postModal}/>
-
-          {showModal && (
-            <div className="post-modal-overlay" onClick={closeModal}>
-             <div className="background-modal"  onClick={(e) => e.stopPropagation()}>
-              
-              <div className="modal-container">
-                <p className="modal-title">Create Post</p>
-                <button 
-                className="close-btn"
-                onClick={closeModal}>
-                X
-                </button>
-              </div>
-              <div className="user-modal-name">
-                <img src={ProfessionalImg} className="user-post-image"></img>
-                <div className="user-container-modal">
-                  <p className="modal-user-name">
-                    {saveUsername.first} {saveUsername.last}
-                    {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
-                    ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
-                    : null}
-                  </p>
-                  <p className="modal-sub-name">@JoshuaAndres</p>
-                </div>
-              </div>
-
-              <div className="user-modal-input">
-                <textarea
-                  placeholder="What's on your mind?"
-                  className="user-modal-input-element"
-                  onChange={inputModal}
-                />
-              </div>
-
-              <div className="name-modal-user-post-container">
-                <img src={BulaguiLoveSophia} className="post-modal-container"/>
-              </div>
-
-              <div className="post-modal-icons">
-                <button className="post-icon-btn">
-                  <FaCamera style={{ color: "#4caf50" }} /> {/* Add Photo */}
-                </button>
-                <button className="post-icon-btn">
-                  <FaVideo style={{ color: "#f44336" }} /> {/* Add Video */}
-                </button>
-                <button className="post-icon-btn">
-                  <FaSmile style={{ color: "#ff9800" }} /> {/* Add Emoji */}
-                </button>
-                <button className="post-icon-btn">
-                  <FaPoll style={{ color: "#2196f3" }} /> {/* Create Poll */}
-                </button>
-                <button className="post-icon-btn">
-                  <FaUserTag style={{ color: "#9c27b0" }} /> {/* Tag Someone */}
-                </button>
-              </div>
-
-              <div className="post-button-modal-container">
-                <button 
-                onClick={addModalPost}>Post</button>
-              </div>
-                </div>
-            </div>)
-                    }
-
-                    {isLoading && (
-                      <div className="loading-overlay">
-                        <div className="spinner"></div>
-                        <p>Posting</p>
-                      </div>
-                    )}
 
             <button 
             type="submit" className="send-btn">
@@ -301,9 +235,10 @@ function sharePost(id) {
                                     </p>
 
                                     <p>
-                                      <FaRegComment/>
+                                      <FaRegComment 
+                                      onClick={() => addComment(media.id)}/>
                                       {media.reactions.comments}
-                                    </p>
+                                    </p>                                   
 
                                     <p>
                                       <FaShare
@@ -316,8 +251,88 @@ function sharePost(id) {
                   })}
                                
                 </div>
-            </div>
 
-      
+                 {/* Modals Section*/}
+
+                 {showModal && (
+            <div className="post-modal-overlay" onClick={closeModal}>
+             <div className="background-modal"  onClick={(e) => e.stopPropagation()}>
+              
+              <div className="modal-container">
+                <p className="modal-title">Create Post</p>
+                <button 
+                className="close-btn"
+                onClick={closeModal}>
+                X
+                </button>
+              </div>
+              <div className="user-modal-name">
+                <img src={ProfessionalImg} className="user-post-image"></img>
+                <div className="user-container-modal">
+                  <p className="modal-user-name">
+                    {saveUsername.first} {saveUsername.last}
+                    {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+                    ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
+                    : null}
+                  </p>
+                  <p className="modal-sub-name">@JoshuaAndres</p>
+                </div>
+              </div>
+
+              <div className="user-modal-input">
+                <textarea
+                  placeholder="What's on your mind?"
+                  className="user-modal-input-element"
+                  onChange={inputModal}
+                />
+              </div>
+
+              <div className="name-modal-user-post-container">
+                <img src={BulaguiLoveSophia} className="post-modal-container"/>
+              </div>
+
+              <div className="post-modal-icons">
+                <button className="post-icon-btn">
+                  <FaCamera style={{ color: "#4caf50" }} /> {/* Add Photo */}
+                </button>
+                <button className="post-icon-btn">
+                  <FaVideo style={{ color: "#f44336" }} /> {/* Add Video */}
+                </button>
+                <button className="post-icon-btn">
+                  <FaSmile style={{ color: "#ff9800" }} /> {/* Add Emoji */}
+                </button>
+                <button className="post-icon-btn">
+                  <FaPoll style={{ color: "#2196f3" }} /> {/* Create Poll */}
+                </button>
+                <button className="post-icon-btn">
+                  <FaUserTag style={{ color: "#9c27b0" }} /> {/* Tag Someone */}
+                </button>
+              </div>
+
+              <div className="post-button-modal-container">
+                <button 
+                onClick={addModalPost}>Post</button>
+              </div>
+            </div>
+           </div>)
+                    }
+
+
+                 {isLoading && (
+                      <div className="loading-overlay">
+                        <div className="spinner"></div>
+                        <p>Posting</p>
+                      </div>
+                    )}  
+
+                  
+                {showComment && (
+                  <div className="comment-modal-overlay">
+                    <div>tite</div>
+                  </div>
+                )}
+
+
+   </div>  
   );
 }

@@ -18,6 +18,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [inputPost, setInputPost] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [showComment, setShowComment] = useState(false);
   const [saveUsername, setSaveUsername] = useState({});
   const [userData, setUserData] = useState([{
   firstname: 'Joshua',
@@ -151,6 +152,8 @@ const [social, setSocial] = useState([{
         setSocial={setSocial}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
+        showComment={showComment}
+        setShowComment={setShowComment}
      />}></Route>
 
      <Route path="/profile" 
