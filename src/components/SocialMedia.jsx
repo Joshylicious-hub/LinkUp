@@ -150,6 +150,10 @@ function addComment() {
   setShowComment(true);
 }
 
+function closeComment() {
+  setShowComment(false);
+}
+
 
   return (
     
@@ -176,161 +180,176 @@ function addComment() {
           </div>
                               
     
-                    <div className="social-media-myday">                 
-                      <div className="joshuastories">
-                      <img src={ProfessionalImg} className="dayStories"/>
-                      <p>Joshua Andres  </p>
-                      </div>
-    
-                      <div className="cyrilstories">
-                      <img src={CyrilImg} className="dayStories"/>
-                       <p>Cyril Vicente</p>
-                      </div>
-    
-                      <div className="bulaguistories">
-                        <img src={NiverioImg} className="dayStories"/>
-                        <p>Rexzielle Niverio</p>
-                      </div>
-    
-                      <div className="sophiastories">
-                        <img src={SophiaImg} className="dayStories"/>
-                        <p>Sophia Bautista</p>
-                      </div>                  
-                    </div>
+        <div className="social-media-myday">                 
+          <div className="joshuastories">
+          <img src={ProfessionalImg} className="dayStories"/>
+          <p>Joshua Andres  </p>
+          </div>
+
+          <div className="cyrilstories">
+          <img src={CyrilImg} className="dayStories"/>
+            <p>Cyril Vicente</p>
+          </div>
+
+          <div className="bulaguistories">
+            <img src={NiverioImg} className="dayStories"/>
+            <p>Rexzielle Niverio</p>
+          </div>
+
+          <div className="sophiastories">
+            <img src={SophiaImg} className="dayStories"/>
+            <p>Sophia Bautista</p>
+          </div>                  
+        </div>
 
 
-                  {social.map((media) => {
+        {social.map((media) => {
 
-                    return (
-                      <div className="post-container" key={media.id}>
-                                 <div className="user-image-container">
-                                   <img src={media.image} className="user-post-image"></img>
-                                      <div>
-                                          <p>{media.name}
-                                              {media.name === 'Joshua Andres' 
-                                              ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
-                                              : null}
-                                          </p>
-                                          <p className="user-email-element">{media.email} 2h</p>
-                                      </div>
-                                   <button className="user-button-element">...</button>
-                                 </div>
-                     
-                                 <div className="user-caption-container">
-                                    <p>{media.caption}</p>
-                                 </div>
-                     
-                                 <div className="name-profile-user-post-container">
-                                    <img src={media.post} className="post-galaxy-container"/>
-                                 </div>
-                     
-                                 <div className="user-profile-reaction-container">
-                                    <p>
-                                      <FaHeart 
-                                        onClick={() => addOne(media.id)}
-                                        className={
-                                         `heart-icon ${media.reactions.liked ? 'liked' : '' }`}
-                                      /> 
-                                      {media.reactions.likes}
-                                    </p>
+          return (
+            <div className="post-container" key={media.id}>
+                        <div className="user-image-container">
+                          <img src={media.image} className="user-post-image"></img>
+                            <div>
+                                <p>{media.name}
+                                    {media.name === 'Joshua Andres' 
+                                    ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
+                                    : null}
+                                </p>
+                                <p className="user-email-element">{media.email} 2h</p>
+                            </div>
+                          <button className="user-button-element">...</button>
+                        </div>
+            
+                        <div className="user-caption-container">
+                          <p>{media.caption}</p>
+                        </div>
+            
+                        <div className="name-profile-user-post-container">
+                          <img src={media.post} className="post-galaxy-container"/>
+                        </div>
+            
+                        <div className="user-profile-reaction-container">
+                          <p>
+                            <FaHeart 
+                              onClick={() => addOne(media.id)}
+                              className={
+                                `heart-icon ${media.reactions.liked ? 'liked' : '' }`}
+                            /> 
+                            {media.reactions.likes}
+                          </p>
 
-                                    <p>
-                                      <FaRegComment 
-                                      onClick={() => addComment(media.id)}/>
-                                      {media.reactions.comments}
-                                    </p>                                   
+                          <p>
+                            <FaRegComment 
+                            onClick={() => addComment(media.id)}/>
+                            {media.reactions.comments}
+                          </p>                                   
 
-                                    <p>
-                                      <FaShare
-                                        onClick={() => sharePost(media.id)}/> 
-                                      {media.reactions.shares}
-                                    </p>
-                                 </div>
-                       </div>
-                    );
-                  })}
-                               
-                </div>
-
-                 {/* Modals Section*/}
-
-                 {showModal && (
-            <div className="post-modal-overlay" onClick={closeModal}>
-             <div className="background-modal"  onClick={(e) => e.stopPropagation()}>
-              
-              <div className="modal-container">
-                <p className="modal-title">Create Post</p>
-                <button 
-                className="close-btn"
-                onClick={closeModal}>
-                X
-                </button>
+                          <p>
+                            <FaShare
+                              onClick={() => sharePost(media.id)}/> 
+                            {media.reactions.shares}
+                          </p>
+                        </div>
               </div>
-              <div className="user-modal-name">
-                <img src={ProfessionalImg} className="user-post-image"></img>
-                <div className="user-container-modal">
-                  <p className="modal-user-name">
-                    {saveUsername.first} {saveUsername.last}
-                    {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
-                    ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
-                    : null}
-                  </p>
-                  <p className="modal-sub-name">@JoshuaAndres</p>
-                </div>
-              </div>
+          );
+        })}
+                      
+      </div>
 
-              <div className="user-modal-input">
-                <textarea
-                  placeholder="What's on your mind?"
-                  className="user-modal-input-element"
-                  onChange={inputModal}
-                />
-              </div>
+            {/* Modals Section*/}
 
-              <div className="name-modal-user-post-container">
-                <img src={BulaguiLoveSophia} className="post-modal-container"/>
-              </div>
+            {showModal && (
+      <div className="post-modal-overlay" onClick={closeModal}>
+        <div className="background-modal"  onClick={(e) => e.stopPropagation()}>
+        
+        <div className="modal-container">
+          <p className="modal-title">Create Post</p>
+          <button 
+          className="close-btn"
+          onClick={closeModal}>
+          X
+          </button>
+        </div>
+        
+        <div className="user-modal-name">
+          <img src={ProfessionalImg} className="user-post-image"></img>
+          <div className="user-container-modal">
+            <p className="modal-user-name">
+              {saveUsername.first} {saveUsername.last}
+              {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+              ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
+              : null}
+            </p>
+            <p className="modal-sub-name">@JoshuaAndres</p>
+          </div>
+        </div>
 
-              <div className="post-modal-icons">
-                <button className="post-icon-btn">
-                  <FaCamera style={{ color: "#4caf50" }} /> {/* Add Photo */}
-                </button>
-                <button className="post-icon-btn">
-                  <FaVideo style={{ color: "#f44336" }} /> {/* Add Video */}
-                </button>
-                <button className="post-icon-btn">
-                  <FaSmile style={{ color: "#ff9800" }} /> {/* Add Emoji */}
-                </button>
-                <button className="post-icon-btn">
-                  <FaPoll style={{ color: "#2196f3" }} /> {/* Create Poll */}
-                </button>
-                <button className="post-icon-btn">
-                  <FaUserTag style={{ color: "#9c27b0" }} /> {/* Tag Someone */}
-                </button>
-              </div>
+        <div className="user-modal-input">
+          <textarea
+            placeholder="What's on your mind?"
+            className="user-modal-input-element"
+            onChange={inputModal}
+          />
+        </div>
 
-              <div className="post-button-modal-container">
-                <button 
-                onClick={addModalPost}>Post</button>
-              </div>
+        <div className="name-modal-user-post-container">
+          <img src={BulaguiLoveSophia} className="post-modal-container"/>
+        </div>
+
+        <div className="post-modal-icons">
+          <button className="post-icon-btn">
+            <FaCamera style={{ color: "#4caf50" }} /> {/* Add Photo */}
+          </button>
+          <button className="post-icon-btn">
+            <FaVideo style={{ color: "#f44336" }} /> {/* Add Video */}
+          </button>
+          <button className="post-icon-btn">
+            <FaSmile style={{ color: "#ff9800" }} /> {/* Add Emoji */}
+          </button>
+          <button className="post-icon-btn">
+            <FaPoll style={{ color: "#2196f3" }} /> {/* Create Poll */}
+          </button>
+          <button className="post-icon-btn">
+            <FaUserTag style={{ color: "#9c27b0" }} /> {/* Tag Someone */}
+          </button>
+        </div>
+
+        <div className="post-button-modal-container">
+          <button 
+          onClick={addModalPost}>Post</button>
+        </div>
+      </div>
+      </div>)
+              }
+
+
+        {isLoading && (
+            <div className="loading-overlay">
+              <div className="spinner"></div>
+              <p>Posting</p>
             </div>
-           </div>)
-                    }
+          )}  
 
+        
+      {showComment && (
+        <div className="comment-modal-overlay" onClick={closeComment}>
+          <div className="comment-modal-container">
 
-                 {isLoading && (
-                      <div className="loading-overlay">
-                        <div className="spinner"></div>
-                        <p>Posting</p>
-                      </div>
-                    )}  
-
-                  
-                {showComment && (
-                  <div className="comment-modal-overlay">
-                    <div>tite</div>
-                  </div>
-                )}
+            <div className="user-post-modal">
+              <p className="username-comment-modal">Joshua's Post</p>
+              <button className="comment-back-button">X</button>
+            </div>
+          
+          <div className="username-comment-container">
+            <img src={ProfessionalImg} className="user-comment-image"></img>
+            <div className="username-comment">
+              <p>Joshua Andres</p>
+              <p>@JoshuaAndres</p>
+            </div>
+          </div>
+          </div>
+        </div>
+      )}
 
 
    </div>  

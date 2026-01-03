@@ -950,3 +950,62 @@ background-color: #f0f2f5;
 }
 
 
+.comment-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.comment-modal-container {
+  padding: 10px;
+  background-color: blue;
+  border-radius: 14px;
+  max-width: 1000px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: modalFade 0.2s ease-out;
+  
+}
+.user-post-modal {
+  position: relative;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.username-comment-container {
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+}
+.username-comment-modal {
+  font-size: 20px;
+}
+
+.comment-back-button {
+  position: absolute;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  cursor: pointer;
+  object-fit: cover;
+  font-size: 20px;
+  font-weight: 600;
+}
+.user-comment-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.username-comment {
+  display: flex;
+  flex-direction: column;
+}
