@@ -68,10 +68,10 @@ export function CoverPage({ saveUsername, userData }) {
   function sendCommentCover() {
     
     const CommentCover = {
-      id: crypto.randomUUID(),
-      image: ProfessionalImg,
-      name: `${saveUsername.first} ${saveUsername.last}`,
-      subname: `@${saveUsername.first}${saveUsername.last}`,
+      id: user.id,
+      image: user.image,
+      name: `${user.firstname} ${user.lastname}`,
+      subname: user.email,
       comment: saveCommentCover,
       reactions: {
         likes: 0,
@@ -177,12 +177,12 @@ export function CoverPage({ saveUsername, userData }) {
           </div>
 
           <div className="cover-input-comments-container">
-            <img src={ProfessionalImg} className="cover-image-comments" />
+            <img src={user.image} className="cover-image-comments" />
 
             <div className="input-wrapper">
 
               <input
-                placeholder={`Comment as ${saveUsername.first} ${saveUsername.last}`}
+                placeholder={`Comment as ${user.firstname} ${user.lastname}`}
                 className="input-element-cover"
                 value={saveCommentCover}
                 onChange={inputCommentCover}
