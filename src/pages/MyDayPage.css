@@ -1,0 +1,109 @@
+.stories-container {
+    display: flex;
+    height: 100vh;
+    background-color: black; 
+    overflow: hidden;
+}
+
+
+.logo-myday-container, 
+.back-myday-container {
+    flex: 1; 
+    padding: 20px;
+    display: flex;
+}
+
+.logo-myday-container {
+    align-items: flex-start;
+    color: white;
+    
+}
+.logo-element-myday {
+    text-decoration: none; 
+    color: #1c1e21; 
+    font-family: 'Pacifico', cursive; 
+    font-size: 36px; 
+    font-weight: normal; 
+    background: linear-gradient( 45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5 ); -webkit-background-clip: 
+    text; 
+    -webkit-text-fill-color: transparent; 
+    text-decoration: none;
+}
+.back-myday-container {
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+
+.image-myday-container {
+    width: 450px;
+    position: relative;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+.username-myday {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 15px;
+    position: absolute; 
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    color: white;
+    text-shadow: 0px 1px 4px rgba(0,0,0,0.8);
+}
+
+.username-myday p {
+    margin: 0;
+}
+
+.username-myday p:first-child {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.username-myday p:last-child {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.user-image-myday {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    object-fit: cover;
+}
+
+
+.user-post-myday {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover; 
+}
+
+
+.back-myday-container button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.back-myday-container button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

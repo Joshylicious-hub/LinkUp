@@ -1,0 +1,312 @@
+.cover-body-container {
+min-height: 100vh;
+display: flex;
+}
+.cover-image-container {
+background-color: blue;
+flex-grow: 1;
+}
+.cover-header-container {
+    background-color: yellow;
+    padding: 20px;
+}
+.cover-image-element {
+  position: relative;          /* anchor for back button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;               /* 🔑 fixed full height */
+  background-color: black;
+}
+
+/* IMAGE */
+.cover-image {
+  height: 100%;                /* 🔑 match container height */
+  max-width: 500px;
+  width: auto;
+  object-fit: cover;
+}
+
+/* BACK BUTTON */
+.cover-back-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 3D glassmorphism effect */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  /* Depth with inner and outer shadows */
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.3),       /* outer shadow */
+    inset 0 2px 4px rgba(255, 255, 255, 0.2); /* inner highlight */
+
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 
+    transform 0.2s ease, 
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.cover-back-button:active {
+  transform: scale(0.95);
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.cover-back-button:hover {
+   background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.1);
+  box-shadow:
+    0 12px 25px rgba(0, 0, 0, 0.4),
+    inset 0 3px 6px rgba(255, 255, 255, 0.25);
+}
+.owner-cover-profile {
+  cursor: pointer;
+  color: #1c1e21;         
+  font-size: 16px;
+  font-weight: 600;       
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+}
+.owner-subname-cover-profile {
+   color: #65676b;        
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+
+
+
+.cover-comment-container {
+  background-color: white;
+  width: 420px;            /* adjust if needed */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;           /* 🔑 full height */
+}
+
+.cover-profile-container {
+  
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  
+}
+.cover-profile {
+ width: 50px;
+  height: 50px;
+  border-radius: 55%;
+}
+.user-cover-profile {
+  
+  padding: 5px;
+}
+.cover-caption-container {
+  background-color: white;
+  padding: 0px 0px 0px 10px;
+   border-bottom: 1px solid #ddd;
+}
+.cover-caption {
+  margin-bottom: 20px;
+}
+.cover-input-reaction-container {
+  margin-left: 5px;
+  margin-top: 5px;
+  display: flex;
+}
+
+.cover-icon-reply {
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  border-radius: 12px;
+}
+.cover-icon-reply:hover {
+background-color: rgba(209, 203, 203, 0.733);
+}
+
+.single-user-comment {
+  background-color: white;
+}
+.cover-user-comments-container {
+display: flex;
+gap: 5px;
+
+background-color: white;
+}
+.comments-cover-user {
+  margin-bottom: 10px;
+  font-size: 20px;
+ 
+  margin-left: 10px;
+  font-weight: 600;
+}
+.cover-comments-container {
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;            /* 🔑 take remaining space */
+  overflow-y: auto;        /* 🔑 scroll comments */
+}
+
+.cover-image-comments {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.cover-username-comments-container {
+  background-color: rgba(209, 203, 203, 0.733);
+  max-width: 300px;
+  width: fit-content;
+  border-radius: 25px;
+  padding: 10px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.username-cover {
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  
+}
+.subname-cover {
+  color: #65676b;         
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.cover-comment-reaction-container {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 55px;
+}
+.cover-icon-reply-user {
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  border-radius: 12px;
+}
+.cover-icon-reply-user:hover {
+background-color: rgba(209, 203, 203, 0.733);
+}
+
+.cover-input-comments-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: white;
+}
+
+/* Input container */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  background-color: #f0f2f5;
+  border-radius: 25px;
+  padding: 6px 10px;
+}
+
+/* Text input */
+.input-element-cover {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 8px 6px;
+  font-size: 14px;
+}
+
+/* Icons container */
+.input-buttons-comment {
+  display: flex;
+  align-items: center;
+  
+}
+
+
+.input-buttons-comment button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  font-size: 15px;
+  color: #65676b;
+
+  transition: 
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    color 0.2s ease;
+}
+
+/* Hover effect */
+.input-buttons-comment button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  transform: scale(1.1);
+}
+
+/* Active (click) */
+.input-buttons-comment button:active {
+  transform: scale(0.95);
+}
+
+/* Send button highlight */
+.input-buttons-comment .send-btn {
+  color: #1877f2;
+}
+
+/* Send hover emphasis */
+.input-buttons-comment .send-btn:hover {
+  background-color: rgba(24, 119, 242, 0.15);
+}
+
+/* Send button highlight */
+.send-btn {
+  color: #1877f2;
+}
+
+.cover-input-element {
+  display: flex;
+  flex-grow: 1;
+}
+
+.input-element-cover {
+  flex-grow: 1;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}

@@ -6,9 +6,15 @@ import {
   FaShare,
   FaHeart,
   FaRegComment, 
-   FaSmile,
-    FaPoll, 
-    FaUserTag  
+  FaSmile,
+  FaPoll, 
+  FaUserTag,
+  FaRegSmile,
+  FaImage,
+  FaMicrophone,
+  FaPaperPlane,
+  FaEdit, 
+  FaTrash
 } from 'react-icons/fa';
 import JoshuaImg from '../images/joshua.jpg';
 import CyrilImg from '../images/cyril.jpg';
@@ -17,10 +23,11 @@ import NiverioImg from '../images/niverio.jpg';
 import SophiaImg from '../images/sophia.jpg';
 import BulaguiLoveSophia from '../images/bulaguilovesophia.png';
 import ProfessionalImg from '../images/professional.jpg';
+import DefaultImg from '../images/default.jpg';
+import GenesisImg from '../images/genesis.jpg'
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 
-
-
- 
 export function SocialMedia({
   saveUsername, 
   showModal, 
@@ -32,8 +39,25 @@ export function SocialMedia({
   isLoading,
   setIsLoading,
   showComment,
-  setShowComment
+  setShowComment,
+  userData,
+  openPost,
+  setOpenPost,
+  selectedUser,
+  setSelectedUser,
+  userStories,
+  setUserStories
   }) {
+
+
+
+const navigate = useNavigate();
+const { id } = useParams();
+
+  const user = userData?.find((test) => String(test.id) === id);
+
+  if (!user) return null;
+
 
 
 function postModal() {
@@ -52,9 +76,9 @@ function addModalPost(event) {
   event.preventDefault();
 
   const newPost = {
-    name: `${saveUsername.first} ${saveUsername.last}`,
-    email: `${saveUsername.first}${saveUsername.last}`,
-    profile: ProfessionalImg,
+    name: `${user.firstname} ${user.lastname}`,
+    email: user.email,
+    profile: DefaultImg,
     caption: inputPost,
     post: BulaguiLoveSophia,
     reactions: {
@@ -113,6 +137,7 @@ function sharePost(id) {
   const postId = id;
   
   social.forEach((shareId) => {    
+    
     if(postId === shareId.id) {
       const newSharePost = {
       name: shareId.name,
@@ -133,10 +158,9 @@ function sharePost(id) {
   setIsLoading(true);
 
   setTimeout(() => {
-    setSocial(prevSocial => [
-    newSharePost,      
-    ...prevSocial 
-  ]);
+
+    setSocial((prevSocial) => [newSharePost, ...prevSocial]);
+
   setIsLoading(false);
   }, 2000)
     
@@ -146,12 +170,61 @@ function sharePost(id) {
   })
 }
 
-function addComment() {
+function addComment(id) {
   setShowComment(true);
+  
 }
-
+  
 function closeComment() {
   setShowComment(false);
+  
+}
+
+function inputComment(event) {
+  setInputPost(event.target.value);
+}
+
+function sendComment(event) {
+  
+  if (event.key !== 'Enter') return;
+  event.preventDefault();
+
+  const newComment = {
+    name: `${user.firstname} ${user.lastname}`,
+    image: user.image || DefaultImg,
+    comment: inputPost,
+    reactions: {
+      likes: 0,
+      comments: 0,
+      shares: 0,
+      liked: false
+    },
+    id: crypto.randomUUID()
+  };
+
+  
+  setSelectedUser(prevComments => [ //parameter prevComments to get old comments
+    newComment, //adds the new comment on top
+    ...prevComments // old comments move down
+  ]);
+
+  setInputPost(''); 
+}
+
+function postOption(id) {
+  
+ const editPostId = social.find((postId) => postId.id === id);
+ 
+ if(editPostId) {
+  
+  if(!openPost) {
+    setOpenPost(true);
+  }else{
+    setOpenPost(false);
+  }
+  
+ }
+
 }
 
 
@@ -162,7 +235,7 @@ function closeComment() {
         <div className="social-media-container">
           
           <div className="social-media-post">
-            <img src={ProfessionalImg} className="profile-picture"/>
+            <img src={user.image || DefaultImg} className="profile-picture"/>
 
             <input 
             placeholder="Share your thoughts" 
@@ -179,28 +252,26 @@ function closeComment() {
             </button>
           </div>
                               
-    
-        <div className="social-media-myday">                 
-          <div className="joshuastories">
-          <img src={ProfessionalImg} className="dayStories"/>
-          <p>Joshua Andres  </p>
+    <div className="social-media-myday"> 
+       
+    {userStories.map((userMyDayStories) => {
+      return (
+                              
+          <div
+            className="ownerstories"
+            style={{ backgroundImage: `url(${userMyDayStories.post})` }}
+            onClick={() => navigate(`/myday/${userMyDayStories.id}`)}
+            key={userMyDayStories.id}
+          >
+            <img src={userMyDayStories.image} className="dayStories" />
+            <p>{userMyDayStories.name}</p>
           </div>
-
-          <div className="cyrilstories">
-          <img src={CyrilImg} className="dayStories"/>
-            <p>Cyril Vicente</p>
-          </div>
-
-          <div className="bulaguistories">
-            <img src={NiverioImg} className="dayStories"/>
-            <p>Rexzielle Niverio</p>
-          </div>
-
-          <div className="sophiastories">
-            <img src={SophiaImg} className="dayStories"/>
-            <p>Sophia Bautista</p>
-          </div>                  
-        </div>
+                         
+        
+      );
+    })}
+    </div>
+        
 
 
         {social.map((media) => {
@@ -208,7 +279,10 @@ function closeComment() {
           return (
             <div className="post-container" key={media.id}>
                         <div className="user-image-container">
-                          <img src={media.image} className="user-post-image"></img>
+                          <img
+                           src={media.image ||user.image} className="user-post-image"
+                           onClick={() => navigate(`/profile/${user.id}`)}
+                           ></img>
                             <div>
                                 <p>{media.name}
                                     {media.name === 'Joshua Andres' 
@@ -217,7 +291,10 @@ function closeComment() {
                                 </p>
                                 <p className="user-email-element">{media.email} 2h</p>
                             </div>
-                          <button className="user-button-element">...</button>
+                          <button
+                           className="user-button-element"
+                           onClick={() => postOption(media.id)}
+                           >...</button>
                         </div>
             
                         <div className="user-caption-container">
@@ -225,7 +302,11 @@ function closeComment() {
                         </div>
             
                         <div className="name-profile-user-post-container">
-                          <img src={media.post} className="post-galaxy-container"/>
+                          <img 
+                          src={media.post} 
+                          className="post-galaxy-container"
+                          onClick={() => addComment()}
+                          />
                         </div>
             
                         <div className="user-profile-reaction-container">
@@ -258,7 +339,7 @@ function closeComment() {
 
             {/* Modals Section*/}
 
-            {showModal && (
+    {showModal && (
       <div className="post-modal-overlay" onClick={closeModal}>
         <div className="background-modal"  onClick={(e) => e.stopPropagation()}>
         
@@ -270,17 +351,17 @@ function closeComment() {
           X
           </button>
         </div>
-        
+
         <div className="user-modal-name">
-          <img src={ProfessionalImg} className="user-post-image"></img>
+          <img src={user.image || DefaultImg} className="user-post-image"></img>
           <div className="user-container-modal">
             <p className="modal-user-name">
-              {saveUsername.first} {saveUsername.last}
-              {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+              {user.firstname} {user.lastname}
+              {user.firstname === 'Joshua' && user.lastname === 'Andres'
               ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
               : null}
             </p>
-            <p className="modal-sub-name">@JoshuaAndres</p>
+            <p className="modal-sub-name">{user.email}</p>
           </div>
         </div>
 
@@ -332,26 +413,133 @@ function closeComment() {
 
         
       {showComment && (
-        <div className="comment-modal-overlay" onClick={closeComment}>
-          <div className="comment-modal-container">
+        <div className="comment-modal-overlay" onClick={closeComment} >
+          <div className="comment-modal-container" onClick={(e) => e.stopPropagation()}>
 
             <div className="user-post-modal">
-              <p className="username-comment-modal">Joshua's Post</p>
-              <button className="comment-back-button">X</button>
+              <p className="username-post-modal">Joshua's Post</p>
+              <button className="comment-back-button" onClick={closeComment}>X</button>
             </div>
-          
+        <div className="comment-modal-background">
+
           <div className="username-comment-container">
             <img src={ProfessionalImg} className="user-comment-image"></img>
             <div className="username-comment">
-              <p>Joshua Andres</p>
-              <p>@JoshuaAndres</p>
+              <p className="owner-modal-name">Joshua Andres</p>
+              <p className="owner-modal-subname">@JoshuaAndres</p>
             </div>
+            <BsPatchCheckFill color="#1DA1F2" className="verified"/>
           </div>
+
+            <div className="userpost-comment-img">
+              <img src={BulaguiLoveSophia} className="user-post-comment"/>
+            </div>
+            
+            <div className="comment-input-reaction-container">
+              <p className="heart-icon-reply">
+                <FaHeart />
+                234
+              </p>
+
+              <p className="heart-icon-reply">
+                <FaRegComment/>
+                324
+              </p>
+
+              <p className="heart-icon-reply">
+                <FaShare/>
+                82
+              </p>
+              
+            </div>
+
+          <p className="comments-modal">Comments</p>
+          <div className="comments-section">
+
+          {selectedUser.map((comment) => {
+            return (
+              <>
+                <div className="comment-input-container" key={comment.id}>
+                <img src={comment.image} className="user-comment-image"/>
+                <div className="comment-input-box">
+                  <p className="username-comment-modal">{comment.name}</p>
+                  <p>{comment.comment}</p>
+                  
+                </div>
+                
+              </div>
+              <div className="reply-input-reaction-container">
+                <p className="heart-icon-reply">
+                  <FaHeart />
+                  {comment.reactions.likes}
+                </p>
+
+                <p className="heart-icon-reply">
+                  <FaRegComment/>
+                  {comment.reactions.comments }
+                </p>
+
+                <p className="heart-icon-reply">
+                  <FaShare/>
+                  {comment.reactions.shares}
+                </p>
+              </div>
+              </>
+
+            );
+          })}
+            
           </div>
         </div>
+
+         <div className="comment-user-modal">
+          <div className="comment-input-container">
+            <img src={user.image || DefaultImg} className="user-comment-image" />
+
+            <div className="input-wrapper">
+              <input
+                placeholder={`Comment as ${user.firstname} ${user.lastname}`}
+                className="placeholder-modal"
+                value={inputPost}    
+                onChange={inputComment}
+                onKeyDown={sendComment} 
+              />
+
+              <div className="input-buttons">
+                <button title="Emoji"><FaRegSmile /></button>
+                <button title="Photo"><FaImage /></button>
+                <button title="Voice"><FaMicrophone /></button>
+                <button 
+                className="send-btn" 
+                title="Send"
+                onClick={sendComment}><FaPaperPlane /></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      
+    </div>
       )}
 
+      {openPost && (
+        <div className="option-container">
 
+          <div className="edit-post-container">
+            <FaEdit className="post-option-icon" />
+            <p className="post-option-text">Edit Post</p>
+          </div>
+
+          <div className="edit-post-container delete">
+            <FaTrash className="post-option-icon delete" />
+            <p className="post-option-text delete">Delete Post</p>
+          </div>
+
+        </div>
+
+      )}
    </div>  
   );
 }

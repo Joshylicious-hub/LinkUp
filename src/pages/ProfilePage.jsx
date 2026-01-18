@@ -13,7 +13,8 @@ export function ProfilePage({
   inputPost,
   setInputPost,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  userData
  }) {
 
   return (
@@ -23,6 +24,7 @@ export function ProfilePage({
 
       <ProfileBackground
       saveUsername={saveUsername}
+      userData={userData}
       />
 
 
@@ -38,6 +40,7 @@ export function ProfilePage({
       setInputPost={setInputPost}
       isLoading={isLoading}
       setIsLoading={setIsLoading}
+      userData={userData}
       />
 
         

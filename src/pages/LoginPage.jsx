@@ -34,7 +34,7 @@ export function LoginPage({userData, setSaveUsername}) {
       };
 
       setSaveUsername(usersName);
-      navigate('/social');
+      navigate(`/social/${matchedUser.id}`);
     }
       
       
@@ -46,7 +46,7 @@ export function LoginPage({userData, setSaveUsername}) {
       <div className="login-page">
         <button
                 className="back-button-login"
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/")}
               >
                 <FaArrowLeft size={20} className="back-arrow-color" />
               </button>

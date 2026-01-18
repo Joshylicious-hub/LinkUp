@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router';
 import { FaArrowLeft } from 'react-icons/fa';
 import  BackgroundImg  from '../images/background.png';
+import  DefaultImg  from '../images/default.jpg';
 
 
 import './SignupPage.css';
@@ -56,7 +57,9 @@ export function SignupPage({userData, setUserData}) {
         {
           firstname: first,
           lastname: last,
+          email: `@${first}${last}`,
           username: confirmEmail,
+          image: DefaultImg,
           password: confirmPassword,
           id: crypto.randomUUID()
           

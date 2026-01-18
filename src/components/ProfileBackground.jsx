@@ -7,15 +7,21 @@ FaEllipsisH,
  FaUserPlus,
  FaArrowLeft,
  FaEye,
- FaImage
+ FaImage,
+ FaSearchPlus
 } from "react-icons/fa";
 import { useState } from 'react';
 import { BsPatchCheckFill } from "react-icons/bs";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useParams } from "react-router";
 
-export function ProfileBackground({ saveUsername }) {
+export function ProfileBackground({ saveUsername, userData }) {
 
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const user = userData?.find((test) => String(test.id) === id);
+
+  if(!user) return null;
   
   const [openPhoto, setOpenPhoto] = useState(false);
 
@@ -43,10 +49,18 @@ export function ProfileBackground({ saveUsername }) {
         <FaArrowLeft size={20} color="white" />
       </button>
 
-      <div className="cover-container">
+       <div
+        className="cover-container"
+        onClick={openModalPhoto}
+        style={{backgroundImage: `
+            linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+            url(${user.cover})
+          `
+        }}
+      >
 
         <img 
-        src={ProfessionalImg}
+        src={user.image}
         className="background-image"
         onClick={openModalPhoto}
         />
@@ -80,19 +94,23 @@ export function ProfileBackground({ saveUsername }) {
           <FaImage style={{ marginRight: "8px" }} />
           Edit Cover Photo
         </Link>
+
+        <Link to={`/cover/${user.id}`}className="photo-link" onClick={exitChangePhoto}>
+          <FaSearchPlus style={{ marginRight: "8px "}}/>
+          See Cover Photo
+        </Link>
         </div>
       </div>
       )}
         
         <h1>
-          {saveUsername.first} {saveUsername.last}
-
-          {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+          {user.firstname} {user.lastname}
+          {user.firstname === 'Joshua' && user.lastname === 'Andres'
             ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
             : null}
         </h1>
 
-        <p>@{saveUsername.first}{saveUsername.last}</p>
+        <p>{user.email}</p>
         <p>Web Developer | Tech Enthusiast</p>
 
         <div className="follow-container">

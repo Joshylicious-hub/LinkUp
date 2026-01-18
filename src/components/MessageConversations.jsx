@@ -14,7 +14,7 @@ export function MessageConversations() {
             <div className="search-user-message-container">
     
               <div className="back-and-message-container">
-                <button onClick={() => navigate("/social")} className="back-button">
+                <button onClick={() => navigate(-1)} className="back-button">
                   <IoArrowBack size={20} />
                 </button>
                 <p>Conversations</p>

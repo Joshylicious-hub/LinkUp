@@ -14,7 +14,10 @@ FaUserTag
 } from "react-icons/fa";
 import { BsPatchCheckFill } from "react-icons/bs";
 import JoshuaImg from '../images/joshua.jpg';
+import DefaultImg from '../images/default.jpg';
 import BulaguiLoveSophia from '../images/bulaguilovesophia.png';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 
 
 export function ProfilePost({ 
@@ -26,10 +29,15 @@ export function ProfilePost({
   inputPost,
   setInputPost,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  userData
  }) {
 
-  
+  const { id } = useParams();
+
+  const user = userData?.find((test) => String(test.id) === id);
+
+  if(!user) return null;
 
   function postModal() {
     setShowModal(true);
@@ -47,9 +55,9 @@ export function ProfilePost({
     event.preventDefault();
   
     const newPost = {
-      name: `${saveUsername.first} ${saveUsername.last}`,
-      email: `${saveUsername.first}${saveUsername.last}`,
-      profile: JoshuaImg,
+      name: `${user.firstname} ${user.lastname}`,
+      email: user.email,
+      profile: user.image,
       caption: inputPost,
       post: BulaguiLoveSophia,
       reactions: {
@@ -109,6 +117,67 @@ setTimeout(() => {
   );
 }
 
+const [openUserDetail, setOpenUserDetail] = useState(false);
+
+function changeDetails() {
+  if (!openUserDetail) {
+    setUserDetail(testing); // 👈 PREFILL FORM
+  }
+  setOpenUserDetail(prev => !prev);
+}
+
+
+const [testing, setTesting] = useState({
+  introduction: 'Coding enthusiast. Love coffee, travel, and discovering new tech.',
+  city: 'Caloocan City',
+  website: 'JoshuaAndresWebsite.com',
+  date: 'Joined December 2025'
+});
+
+const [userDetail, setUserDetail] = useState({
+  introduction: '',
+  city: '',
+  website: '',
+  date: ''
+})
+
+
+function introductionDetail(event) {
+  setUserDetail(prev => ({
+    ...prev,
+    introduction: event.target.value
+  }));
+}
+
+function cityDetail(event) {
+  setUserDetail(prev => ({
+    ...prev,
+    city: event.target.value
+  }));
+}
+
+function websiteDetail(event) {
+  setUserDetail(prev => ({
+    ...prev,
+    website: event.target.value
+  }));
+}
+
+function dateDetail(event) {
+  setUserDetail(prev => ({
+    ...prev,
+    date: event.target.value
+  }));
+}
+
+
+function confirmDetail() {
+  setTesting(userDetail);
+  setOpenUserDetail(false);
+}
+
+
+
   return (
     <div className="content-container">
     
@@ -117,27 +186,98 @@ setTimeout(() => {
     
                 <p>
                   <FaUser className="about-icon" />
-                  Coding enthusiast. Love coffee, travel, and discovering new tech.
+                  {testing.introduction}
                 </p>
     
                 <p>
                   <FaMapMarkerAlt className="about-icon" />
-                  Caloocan City
+                  {testing.city}
                 </p>
     
                 <p>
                   <FaGlobe className="about-icon" />
-                  JoshuaAndresWebsite.com
+                  {testing.website}
                 </p>
     
                 <p>
                   <FaCalendarAlt className="about-icon" />
-                  Joined December 2025
+                  {testing.date}
                 </p>
     
                 <div className="edit-details-container">
-                  <button>Edit details</button>
+                  <button
+                  onClick={changeDetails}
+                  >Edit details</button>
                 </div>
+
+                {openUserDetail && (
+                  <div className="user-details-overlay" onClick={changeDetails}>
+                    <div className="user-details-container" onClick={(e) => e.stopPropagation()}>
+                      <div className="user-edit-element">
+                        <p className="tite">tite</p>
+                      <p className="user-edit-paragraph">Edit details</p>
+                      <button
+                        className="user-back-button-details"
+                        onClick={changeDetails}
+                      >
+                        X
+                      </button>
+                    </div>
+
+                      <div className="editing-container">
+
+                      <div className="detail-container">
+                        <p className="introduction-detail">Introduction</p>
+                        <input
+                          placeholder="Tell me about yourself"
+                          className="input-detail"
+                        
+                          onChange={introductionDetail}
+                        />
+
+                      </div>
+
+                      <div className="detail-container">
+                        <p className="introduction-detail">City</p>
+                        <input 
+                        placeholder="Where do you live?" 
+                        className="input-detail"
+                        
+                        onChange={cityDetail}
+                        />
+                      </div>
+
+                      <div className="detail-container">
+                        <p className="introduction-detail">Website</p>
+                        <input 
+                        placeholder="Enter your website" 
+                        className="input-detail"
+                        
+                        onChange={websiteDetail}
+                        />
+                      </div>
+
+                      <div className="detail-container">
+                        <p className="introduction-detail">Joined</p>
+                        <input 
+                        placeholder="When did you joined?" 
+                        className="input-detail"
+                        
+                        onChange={dateDetail}
+                        />
+                      </div>
+
+                      </div>
+
+                       <div className="detail-confirm-container">
+                        <button 
+                        className="detail-confirm"
+                        onClick={confirmDetail}
+                        >Confirm</button>
+                      </div>
+                    </div>
+                  </div>
+                )}
              </div>
     
              <div className="buttons-container">
@@ -167,15 +307,15 @@ setTimeout(() => {
                         </button>
                       </div>
                       <div className="profile-user-modal-name">
-                        <img src={JoshuaImg} className="user-post-image"></img>
+                        <img src={user.image || DefaultImg} className="user-post-image"></img>
                         <div className="profile-user-container-modal">
                           <p className="profile-modal-user-name">
-                            {saveUsername.first} {saveUsername.last}
-                            {saveUsername.first === 'Joshua' && saveUsername.last === 'Andres'
+                            {user.firstname} {user.lastname}
+                            {user.firstname === 'Joshua' && user.lastname === 'Andres'
                             ? <BsPatchCheckFill color="#1DA1F2" className="verified"/>
                             : null}
                           </p>
-                          <p className="profile-modal-sub-name">@JoshuaAndres</p>
+                          <p className="profile-modal-sub-name">{user.email}</p>
                         </div>
                       </div>
         
@@ -229,11 +369,11 @@ setTimeout(() => {
               </div>
     
               {social.map((ownerPost) => {
-                const fullname = `${saveUsername.first} ${saveUsername.last}`
+                const fullname = `${user.firstname} ${user.lastname}`
     
                 if(fullname === ownerPost.name) {
                   return (
-                  <div className="profile-post-container">
+                  <div className="profile-post-container" key={ownerPost.id}>
                   <div className="profile-image-container">
                     <img src={ownerPost.profile} className="profile-post-image"></img>
                     <div>

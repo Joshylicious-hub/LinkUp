@@ -17,14 +17,22 @@ export function SocialPage({
   isLoading,
   setIsLoading,
   showComment,
-  setShowComment
+  setShowComment,
+  openPost,
+  setOpenPost,
+  selectedUser,
+  setSelectedUser,
+  userStories,
+  setUserStories
   }) {
-  console.log(userData);
+  
   return (
     <>
     <title>LinkUp</title>
     <div className="body-container">
-    <SocialNavBar />
+    <SocialNavBar 
+    userData={userData}
+    />
 
     <SocialMedia 
       userData={userData} 
@@ -41,6 +49,12 @@ export function SocialPage({
       setIsLoading={setIsLoading}
       showComment={showComment}
       setShowComment={setShowComment}
+      openPost={openPost}
+      setOpenPost={setOpenPost}
+      selectedUser={selectedUser}
+      setSelectedUser={setSelectedUser}
+      userStories={userStories}
+      setUserStories={setUserStories}
      />
 
     <SocialRightNavBar 

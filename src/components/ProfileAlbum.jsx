@@ -4,7 +4,8 @@ import SophiaImg from '../images/sophia.jpg';
 import CyrilImg from '../images/cyril.jpg';
 import GalaxyImg from '../images/galaxy.jpg';
 
-export function ProfileAlbum({ saveUsername }) {
+export function ProfileAlbum({ saveUsername, userData }) {
+  
   return (
     
      <div className="friends-container">
